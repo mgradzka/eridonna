@@ -1,0 +1,8 @@
+{
+    "general": {
+        "404": {
+            "title": "Nie ma takiej strony",
+            "subtext_html": "Przepraszamy"
+        }
+    }
+}
