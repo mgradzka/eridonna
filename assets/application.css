@@ -1,111 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+body {
+  /* background-color: rgb(247, 247, 232); */
+  font-size: 18px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.flex {
+  display: flex;
+}
+
+.container {
+  padding: 2rem;
+}
+
+summary,
+ul {
+  list-style: none;
+}
+
+/* NAVIGATION */
+nav {
+  align-items: center;
+}
+.dropdown-menu {
+  background-color: inherit;
+  font-size: inherit;
+  border: none;
+}
+
+.nav-icons-desktop {
+  display: none;
+}
+.navbar-toggler-icon {
+  background-image: none;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+#mobile {
+  font-size: 2rem;
+}
+
+.nav-icons {
+  font-size: 1.5rem;
+}
 
 
+
+
+#numberOfCartItem1, #numberOfCartItem2 {
+  position: relative;
+  top: 10px;
+  left: -12px;
+  font-size: 0.6rem;
+}
+
+/* .shopping-bag {
+  position: absolute
+} */
+
+
+/* .navbar-toggler-icon::before {
+    font-family: 'Material Symbols Outlined';
+    content: "\e5d2"; 
+    font-size: 2rem;
+  } */
+
+.img-explore,
+.card-img-top {
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  clip-path: inset(1%);
+}
 
 .inner-hero-section {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 400px;
+  padding-top: 5rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 400px;
 }
 
-.inner-hero-section img, .inner-hero-section svg {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    object-position: top;
+.inner-hero-section img,
+.inner-hero-section svg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  object-position: top;
 }
 
-.login-form, .forgot-password-form {
-    width: 100%;
-    max-width: 330px;
-    margin:auto
+.login-form,
+.forgot-password-form {
+  width: 100%;
+  max-width: 330px;
+  margin: auto;
 }
 
-.dropup {
-    position: relative;
-    display: inline-block;
+#image {
+  width: 10rem;
+  height: 12rem;
 }
 
-.localeBtn {
-    background-color: #4398DB;
-    color: white;
-    padding: 6px;
-    font-size: 20px;
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    max-width: 70px;
-    max-height: 70px;
-    
+/* collection */
+.collection-page {
+  padding-top: 5rem;
 }
 
-.localeBtn img  {
-    width: 50px;
-    height: 50px;
+/********************* MEDIA QUERIES FOR SMALLER DEVICES ********************/
+@media screen and (min-width: 300px) and (max-width: 480) {
 }
 
-.dropup-content {
-    display: none;
-    position: fixed;
-    bottom: 80px;
-    right: 25px;
-    min-width: 210px;
-    z-index: 1;
-    background-color: #f1f1f1;
+/********************* MEDIA QUERIES FOR SMALLER TABLET ********************/
 
+@media screen and (min-width: 480px) and (max-width: 650px) {
 }
 
-.dropup:hover .dropup-content {
-display: block;
-}   
+/*********** MEDIA QUERIES FOR BIGGER TABLET***********/
 
-.dropup-content a{
-    columns: #000;
-    font-size: 17px;
-    padding: 15px 10px;
-    display: block;
-    text-align: center;
+@media screen and (min-width: 650px) and (max-width: 1080px) {
 }
 
-#shopify-section-translation {
-    position: fixed;
-}
+/* MEDIA QUERIES FOR DESKTOP */
 
-.dropdownn {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-  }
-  
-  .dropdownn:hover .dropdown-content {
+@media screen and (min-width: 1080px) {
+  .nav-icons-desktop {
     display: block;
   }
 
-  .flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  .img-explore,
+  .card-img-top {
+    width: 14rem;
+    height: 14rem;
   }
 
-  .material-symbols-outlined{
-    line-height: inherit;
-    font-size:15px
+  .nav-icons-mobile {
+    display: none;
   }
+
+  .dropdown-menu {
+    background-color: rgba(
+      var(--bs-tertiary-bg-rgb),
+      var(--bs-bg-opacity)
+    ) !important;
+  }
+
+  .dropdown-menu[data-bs-popper] {
+    top: auto;
+    left: auto;
+  }
+
+  .navbar-collapse {
+    padding: 0.5rem 2rem
+  }
+
+  .search-nav{
+    padding-left:40rem
+  }
+}

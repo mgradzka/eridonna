@@ -1,0 +1,72 @@
+{% comment %}
+https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeveloper
+{% endcomment %}
+
+{%- capture flickity_options -%}
+  {
+  "prevNextButtons": true,
+        "contain": true,
+        "cellAlign": "left",
+        "groupCells": true,
+        "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
+        "wrapAround": true
+      }{%- endcapture -%}
+
+<div class="featured-collection-slider p-4 page-width">
+  {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </div>
+  {% endif %}
+
+  {%- assign collection = collections[section.settings.collection] -%}
+  {%- assign product_limit = section.settings.product_count -%}
+
+  <div class="products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
+    {% for product in collection.products limit: product_limit %}
+      <article class="carousel-cell card rounded-0 m-2 p-2">
+        <a href="{{ product.url | within: collection }}">
+          <img class="img-explore" src="{{ product.featured_image | img_url: 'master'}}">
+          <h4>{{ product.title }}</h4>
+          <p>{{ product.price | money }}</p>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection Slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Collection"
+      }, {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      }, {
+        "type": "range",
+        "id": "product_count",
+        "min": 3,
+        "max": 12,
+        "label": "Number of products to display",
+        "default": 3
+      }
+    ],
+    "presets": [
+      {
+        "category": "Collection",
+        "name": "Collection Slider",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
+
+{% comment %}
+schema creates customizable settings
+{% endcomment %}

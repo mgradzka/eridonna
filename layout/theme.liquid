@@ -12,14 +12,20 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'filtering.css' | asset_url | stylesheet_tag }}
+    {{ 'slideshow.css' | asset_url | stylesheet_tag }}
+    {{ 'wishlist.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
-    {% section 'translation' %}
     {% section 'header' %}
 
     <main role="main">
       {{ content_for_layout }}
     </main>
     {% section 'footer-section' %}
+
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css"> 
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="https://kit.fontawesome.com/81264b6916.js" crossorigin="anonymous"></script>
   </body>
 </html>

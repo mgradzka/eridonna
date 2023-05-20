@@ -1,0 +1,84 @@
+ /* SLIDESHOW */
+
+ .featured-collection-slider{
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.featured-collection-slider .carousel-cell{
+  width:50%;
+}
+
+
+
+ /* .featured-collection-slider h2{
+    margin: 60px 0;
+  } */
+
+  .carousel-cell {
+    margin: 0 10px;
+  }
+  .featured-collection-slider{
+    padding-left: 55px;
+    padding-right: 55px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+ 
+  .flickity-button:disabled{
+    pointer-events: all!important;
+  }
+
+  .flickity-page-dots {
+    bottom: -22px !important;
+  }
+  /* dots are lines */
+  .flickity-page-dots .dot {
+    height: 4px !important;
+    width: 40px !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+}
+
+.flickity-page-dots .dot.is-selected {
+  opacity: 0.7 !important;
+}
+
+  /* .flickity-button {
+    background: #333!important;
+  }
+  .flickity-button:hover {
+    background: #F90!important;
+  } */
+  
+  /* .flickity-prev-next-button {
+    width: 30px!important;
+    height: 30px!important;
+    border-radius: 5px!important;
+    -webkit-border-radius: 5px!important;
+    -moz-border-radius: 5px!important;
+    -ms-border-radius: 5px!important;
+    -o-border-radius: 5px!important;
+}
+ 
+  .flickity-button-icon {
+    fill: white !important;
+  } */
+
+  .flickity-button {
+    background: #f3f3f3!important;
+  }
+
+
+ 
+  @media screen and (min-width: 1080px){
+  
+    .featured-collection-slider .carousel-cell{
+      width:25%;
+      padding: 0 15px;
+      display: block;
+    }
+  }

@@ -1,0 +1,14 @@
+<div class="card" style="width: 18rem;">
+    {% if image != blank %}
+        <a href="#" id="productInfoAnchor" product-handle="{{ product.handle }}" product-price="{{ product.price | money_without_trailing_zeros }}">
+          <img  class="card-img-top" src="{{ image | img_url: 'medium' }}" alt="{{ product.title }}">
+        </a>
+        {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+    {% endif %}
+    
+    
+        <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+        <p>{{ product.price | money_without_trailing_zeros }}</p>
+   
+</div>

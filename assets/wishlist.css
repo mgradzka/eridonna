@@ -1,0 +1,26 @@
+/* .swym-details, .swym-notification-wishlist {
+  color: red !important;
+} */
+
+#swym-notification,
+.swym-details,
+.swym-notification-wishlist {
+  left: 200px !important;
+  right: 18px !important;
+  bottom: 2px !important;
+}
+
+.swym-ui-component img {
+  display: none !important;
+}
+
+.swym-powered-by-text {
+  display: none !important;
+}
+.swym-ui-component * {
+  font-family: "Roboto", sans-serif !important;
+}
+
+.favorite {
+  font-size: 20px;
+}

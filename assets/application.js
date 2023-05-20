@@ -38,16 +38,6 @@ if (document.getElementById("country") != null) {
   });
 }
 
-const localeItems = document.querySelectorAll("#localeItem");
-if (localeItems.length > 0) {
-  localeItems.forEach((item) => {
-    item.addEventListener("click", (event) => {
-      document.getElementById("localeCode").value = item.getAttribute("lang");
-      document.getElementById("localiation_form_tag").submit();
-    });
-  });
-}
-
 if (document.getElementById("forgotPassword") != null) {
   document.getElementById("forgotPassword").addEventListener("click", (e) => {
     const element = document.querySelector("#forgot_password_form");
@@ -85,17 +75,32 @@ if (document.getElementById("forgotPassword") != null) {
 //   });
 // }
 
-document.addEventListener("DOMContentLoaded", () => {
-  updateCart();
+document.addEventListener("DOMContentLoaded", (data) => {
+  updateCart(data);
 });
 
-function updateCart() {
-  fetch("/cart.js")
-    .then((resp) => resp.json())
-    .then(
-      (data) =>
-        (document.getElementById("numberOfCartItems").innerHTML =
-          data.item_count)
-    )
-    .catch((err) => console.error(err));
+async function updateCart(data) {
+  try {
+    const response = await fetch("/cart.js");
+    const data = await response.json();
+    document.querySelector("#numberOfCartItem1").innerHTML = data.item_count;
+    document.querySelector("#numberOfCartItem2").innerHTML = data.item_count;
+  } catch (error) {
+    console.error(error);
+  }
 }
+
+// menu
+const menuElm = document.querySelector(".navbar-toggler");
+const icon = document.querySelector(".navbar-toggler-icon");
+const fontawesome = document.getElementById("mobile");
+
+menuElm.addEventListener("click", function (event) {
+  event.preventDefault();
+
+  if (menuElm.classList.contains("collapsed")) {
+    fontawesome.textContent = "menu";
+  } else {
+    fontawesome.textContent = "close";
+  }
+});

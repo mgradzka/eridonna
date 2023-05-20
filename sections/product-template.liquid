@@ -1,22 +1,23 @@
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-6 col-12">
       {% comment %}
-        showing the main image
+      showing the main image
       {% endcomment %}
       <img
         class="img-fluid"
         src="{{ product_image | img_url: 'large'}}"
-        alt="{{ product_image.alt }}"
-        id="ProductMainImage">
+        alt="{{ product_image.alt }}">
       {% for image in product.images %}
-              {% comment %}
-        looping through all images
-      {% endcomment %}
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ image.alt }}">
+        {% if image.src != product_image %}
+          {% comment %}
+          looping through all images
+          {% endcomment %}
+          <img src="{{ image.src | img_url: 'medium' }}" alt="{{ image.alt }}">
+        {% endif %}
       {% endfor %}
     </div>
     <div class="col-md-6 col-12">
@@ -52,6 +53,16 @@
             min="1">
         </div>
 
+            <button class="swym-button swym-add-to-wishlist"
+            data-with-epi="true"
+            data-swaction="addToWishlist"
+            data-product-id="{{ product.id }}"
+            data-variant-id="{{ product.variants[0].id }}"
+            data-product-url="{{ shop.url }}{{ product.url }}"
+            style="background: transparent"
+            >
+              Wishlist
+            </button>
         <button
           type="submit"
           name="add"
