@@ -1,0 +1,107 @@
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+  {%- assign t = template | split: '.' | first -%}
+
+  <nav
+    class="breadcrumbs"
+    role="navigation"
+    aria-label="breadcrumbs">
+    <ol class="breadcrumbs__list">
+      <li class="breadcrumbs__item ">
+        <a class="breadcrumbs__link home-icon" href="/">
+
+
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 17 17"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.2924 8.25065L8.62226 0.165195C8.40071 -0.0550649 8.06846 -0.0550649 7.87461 0.165195L0.176657 8.25065C0.0104646 8.43946 -0.0448862 8.69118 0.0381421 8.9427C0.121167 9.1944 0.315032 9.3516 0.564238 9.3516H2.55797V15.864C2.55797 16.21 2.80719 16.4932 3.11177 16.4932H13.4126C13.7172 16.4932 13.9664 16.21 13.9664 15.864L13.9665 9.3516H15.9603C16.1818 9.3516 16.4033 9.19423 16.4864 8.9427C16.514 8.69099 16.4587 8.4393 16.2925 8.25048L16.2924 8.25065ZM6.04678 15.2351V10.7363C6.04678 9.38344 7.01598 8.25085 8.23437 8.25085C9.45275 8.25085 10.422 9.35201 10.422 10.7363V15.2351H6.04678Z" fill="#372C28" />
+          </svg>
+
+
+        </a>
+      </li>
+      {%- case t -%}
+        {%- when 'page' -%}
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__link"
+            href="{{ page.url }}"
+            aria-current="page">{{ page.title }}</a>
+        </li>
+        {%- when 'product' -%}
+        {%- if collection.url -%}
+          <li class="breadcrumbs__item">
+            {{ collection.title | link_to: collection.url }}
+          </li>
+        {%- endif -%}
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__link"
+            href="{{ product.url }}"
+            aria-current="page">{{ product.title }}</a>
+        </li>
+        {%- when 'collection' and collection.handle -%}
+        {%- if current_tags -%}
+          <li class="breadcrumbs__item">
+            {{ collection.title | link_to: collection.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            {%- capture tag_url -%}
+              {{ collection.url }}/{{ current_tags | join: "+" }}{%- endcapture -%}
+            <a
+              class="breadcrumbs__link"
+              href="{{ tag_url }}"
+              aria-current="page">{{ current_tags | join: " + " }}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a
+              class="breadcrumbs__link"
+              href="{{ collection.url }}"
+              aria-current="page">{{ collection.title }}</a>
+          </li>
+        {%- endif -%}
+        {%- when 'blog' -%}
+        {%- if current_tags -%}
+          <li class="breadcrumbs__item">
+            {{ blog.title | link_to: blog.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            {%- capture tag_url -%}
+              {{ blog.url }}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+            <a
+              class="breadcrumbs__link"
+              href="{{ tag_url }}"
+              aria-current="page">{{ current_tags | join: " + " }}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a
+              class="breadcrumbs__link"
+              href="{{ blog.url }}"
+              aria-current="page">{{ blog.title }}</a>
+          </li>
+        {%- endif -%}
+        {%- when 'article' -%}
+        <li class="breadcrumbs__item">
+          {{ blog.title | link_to: blog.url }}
+        </li>
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__link"
+            href="{{ article.url }}"
+            aria-current="page">{{ article.title }}</a>
+        </li>
+      {%- else -%}
+        <li class="breadcrumbs__item">
+          <a
+            class="breadcrumbs__link"
+            href="{{ request.path }}"
+            aria-current="page">{{ page_title }}</a>
+        </li>
+      {%- endcase -%}
+    </ol>
+  </nav>
+{%- endunless -%}

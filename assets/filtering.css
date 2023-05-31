@@ -1,14 +1,24 @@
   /* Accordion  */
-  .accordion-button::after {
+
+  .filter-form .accordion-button::after {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
     transform: scale(.7) !important;
   }
-  .accordion-button:not(.collapsed)::after {
+  .filter-form .accordion-button:not(.collapsed)::after {
     background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3e%3cpath fill-rule='evenodd' d='M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z' clip-rule='evenodd'/%3e%3c/svg%3e");
   }
 
   .accordion-button:not(.collapsed) {
-    background-color: rgb(242, 241, 241) !important;
+    background-color: transparent !important;
+  }
+
+  .accordion, .accordion * {
+    border: 1px solid transparent !important;
+    --bs-accordion-border-color: transparent !important
+  }
+
+  .accordion-body, .accordion-button {
+    padding: 0.5rem 0 0 !important
   }
 
   .accordion-button:focus {
@@ -17,6 +27,63 @@
 
 
   /* filtering */
+
+  #filter-icon {
+    cursor: pointer;
+  }
   .filter-group-display__list {
     padding-left: 0;
   }
+
+  .filter-container {
+    position: absolute;
+    background-color: white;
+    padding: 2rem;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    width: 30%;
+    
+    /* row-gap: 35vw; */
+    transform: translateX(-150vw);
+    z-index: 101;
+    transition: transform 0.25s ease-in-out;
+    -webkit-transition: transform 0.25s ease-in-out;
+    -moz-transition: transform 0.25s ease-in-out;
+    -ms-transition: transform 0.25s ease-in-out;
+    -o-transition: transform 0.25s ease-in-out;
+    -webkit-transform: translateX(-150vw);
+    -moz-transform: translateX(-150vw);
+    -ms-transform: translateX(-150vw);
+    -o-transform: translateX(-150vw);
+  }
+  
+  .filter-container.opened {
+    transform: translateX(-10px);
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+}
+
+.filter-container span, .filter-container label {
+  font-family: "brandon_grotesqueregular";
+  font-size: 1rem;
+}
+
+.filter-container button {
+  font-size: 1.2rem;
+}
+
+.sort-by{
+  flex:none
+}
+
+.form-select {
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  padding: 0.5rem 1rem;
+}

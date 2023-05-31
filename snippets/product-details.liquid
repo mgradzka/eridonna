@@ -1,0 +1,103 @@
+{% assign current_product = product.selected_or_first_available_variant %}
+
+<div class="accordion accordion-flush product-details__section" id="accordionFlushExample">
+  <div class="accordion-item">
+    <div class="accordion-header">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseOne"
+        aria-expanded="true"
+        aria-controls="flush-collapseOne">
+        <h5>
+          Description</h5>
+      </button>
+    </div>
+    <div id="flush-collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">{{ product.description }}</div>
+
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseTwo"
+        aria-expanded="true"
+        aria-controls="flush-collapseTwo">
+        <h5>
+          Product details</h5>
+      </button>
+    </div>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        <div class="flex justify-content-between">
+          <h6>Material:
+          </h6>
+          <p>{{ product.metafields.custom.material }}</p>
+        </div>
+
+        <div class="flex justify-content-between">
+          <h6>Color:
+          </h6>
+          <p>{{ product.metafields.custom.color }}</p>
+        </div>
+
+        {% if product.metafields.custom.stone_type != blank %}
+          <div class="flex justify-content-between">
+            <h6>Surface Treatment:
+            </h6>
+            <p>{{ product.metafields.custom.surface_treatment }}</p>
+          </div>
+        {% endif %}
+
+        {% if product.metafields.custom.stone_type != blank %}
+
+          <div class="flex justify-content-between">
+            <h6>Stone Type:
+            </h6>
+            <p>{{ product.metafields.custom.stone_type }}</p>
+          </div>
+        {% endif %}
+
+        <div class="flex justify-content-between">
+          <h6>Size:
+          </h6>
+          <p>{{ product.metafields.custom.size }}</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseThree"
+        aria-expanded="true"
+        aria-controls="flush-collapseThree">
+        <h5>Delivery & Returns</h5>
+      </button>
+    </div>
+    <div id="flush-collapseThree" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        {% if product.available %}
+          <p>This item is possible to be delivered to you in 1-2 work days since it is currently in stock.
+            For further details about returns read information on this page</p>
+        {% else %}
+          <p>Item is currently not in stock, therefore delivery can take longer.
+            For further details about returns read information on this page
+          </p>
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>

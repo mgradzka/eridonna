@@ -1,31 +1,95 @@
 {% assign current_product = product.selected_or_first_available_variant %}
 {% assign product_image = current_product.featured_image | default: product.featured_image %}
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6 col-12">
-      {% comment %}
-      showing the main image
-      {% endcomment %}
-      <img
-        class="img-fluid"
-        src="{{ product_image | img_url: 'large'}}"
-        alt="{{ product_image.alt }}">
-      {% for image in product.images %}
-        {% if image.src != product_image %}
-          {% comment %}
-          looping through all images
-          {% endcomment %}
-          <img src="{{ image.src | img_url: 'medium' }}" alt="{{ image.alt }}">
-        {% endif %}
-      {% endfor %}
+<div id="productPage" class="container-fluid">
+  {% include 'breadcrumbs' %}
+
+  <div class="row product-page-container">
+
+    <div class="col-md-6 col-12  product-image-wrapper">
+      <!-- card left -->
+
+      <div class="slider-container">
+
+
+        <div class="slider">
+          <img
+            class="grid-item background-effect"
+            src="{{ product_image | img_url: 'large'}}"
+            alt="{{ product_image.alt }}">
+
+          {% for image in product.images %}
+            {% if image.src != product_image %}
+
+              <img
+                class="grid-item background-effect"
+                src="{{ image.src | img_url: 'large' }}"
+                alt="{{ image.alt }}"
+                data-id="{{ image.alt }}">
+
+            {% endif %}
+          {% endfor %}
+
+        </div>
+        <button class="prev-button">&#60;</button>
+        <button class="next-button">&#62;</button>
+
+      </div>
     </div>
-    <div class="col-md-6 col-12">
-      <h21>{{ product.title }}</h1>
-      <p>{{ current_product.price | money_with_currency }}</p>
+
+
+    <section class="col-md-6 col-12 flex flex-column gap-3 content-wrapper">
+      <div class="flex gap-5 justify-content-between">
+        <h3>{{ product.title }}</h3>
+        <!-- Swym button on product pages -->
+        <div class="swym-wishlist-button-bar"></div>
+      </div>
+      <!-- Swym button on product pages -->
+      <div class="flex justify-content-between">
+        {% comment %}
+          
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        {% endcomment %}
+        <p>{{ current_product.price | money_with_currency }}</p>
+      </div>
 
       {% form 'product', product, class: "product-form", id: "AddToCartForm" %}
         <div class="mb-3">
+
+          {% if product.available %}
+            <div class="flex align-items-baseline gap-2">
+              <div class="dot green-dot"></div>
+              <p>In Stock</p>
+              {% render 'shipping24h' %}
+            </div>
+
+          {% else %}
+            <div class="flex align-items-baseline gap-2">
+              <div class="dot red-dot"></div>
+              <p>Not In-Stock</p>
+            </div>
+          {% endif %}
+
+          <div class="category-sku">
+            <p>
+              SKU: {{ product.metafields.custom.sku }}<br>
+              Category: {{ product.type }}</p>
+          </div>
+
+          {% comment %}
+
+          {% for variant in product.variants %}
+          {% if variant.available %}
+          <input type="checkbox" id="{{ variant.id }}" name="{{ variant.id }}" value="{{ variant.id }}">
+          <label for="{{ variant.id }}">{{ variant.title }}</label><br>
+          {% else %}
+          <input type="checkbox" id="{{ variant.id }}" name="{{ variant.id }}" value="{{ variant.id }}" disabled="disabled">
+          <label for="{{ variant.id }}">{{ variant.title }}</label><br>
+          {% endif %}
+          {% endfor %}
+          {% endcomment %}
+
+
           <select
             name="id"
             id="productSelect"
@@ -42,83 +106,82 @@
               {% endif %}
             {% endfor %}
           </select>
-        </div>
-        <div class="mb-3">
-          <input
-            type="number"
-            class="form-control"
-            name="quantity"
-            id="Quantity"
-            value="1"
-            min="1">
+
+
+
         </div>
 
-            <button class="swym-button swym-add-to-wishlist"
-            data-with-epi="true"
-            data-swaction="addToWishlist"
-            data-product-id="{{ product.id }}"
-            data-variant-id="{{ product.variants[0].id }}"
-            data-product-url="{{ shop.url }}{{ product.url }}"
-            style="background: transparent"
-            >
-              Wishlist
-            </button>
-        <button
-          type="submit"
-          name="add"
-          id="AddToCart"
-          class="btn btn-secondary btn-lg w-100 rounded-0">Add To Cart</button>
+        {% comment %}
+        <div class="mb-3">
+        <input
+        type="number"
+        class="form-control"
+        name="quantity"
+        id="Quantity"
+        value="1"
+        min="1">
+        </div>
+        {% endcomment %}
+
+        {% comment %}
+
+        {% endcomment %}
+        <div class="flex">
+          <div class="input-group align-self-center product-buttons">
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-subtract" type="button">-</button>
+            </span>
+            <input
+              type="number"
+              class="form-control item-quantity"
+              name="quantity"
+              id="Quantity"
+              value="1"
+              min="1">
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-add" type="button">+</button>
+            </span>
+          </div>
+
+
+          <button
+            type="submit"
+            name="add"
+            id="AddToCart"
+            class="button btn-main flex gap-2">Add To Cart
+            <span class="material-symbols-outlined nav-icons">shopping_bag</span>
+          </button>
+        </div>
         {% if section.settings.dynamic_buttons_checkbox == true %}
           {{ form | payment_button }}
         {% endif %}
-        {% comment %}
 
-
-        {% endcomment %}
       {% endform %}
-    </div>
-  </div>
-</div>
+      {% render 'product-details' %}
+    </section>
+    {% comment %}
 
+    {% endcomment %}</div>
+
+</div>
 {% comment %}
+  
+{% if shop.customer_accounts_enabled %}
+  {% if customer %}
+    <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+  {% endif %}
+{% endif %}
+{% endcomment %}
 
 
-<div class="container">
-<section id="product_recommendation" class="row content-justify-center my-5">
-<div class="text-center">
-<h2>You may also like this</h2>
-<div id="product_recommendation_body">
 
+{% if product.has_only_default_variant %}
 
-</div>
-</div>
-</section>
-</div>
+  <style>
+    #productSelect {
+      display: none;
+    }
+  </style>
+{% endif %}
 
-<script>
-const productRecommendationBody = document.getElementById('product_recommendation_body')
-fetch('/recommendations/products.json?product_id={{product.id}}')
-.then((resp) => resp.json())
-.then(({ products }) => {
-console.log(products);
-if (products.length > 0){
-products.forEach(function(product, index){
-let card;
-
-})
-}
-})
-</script>
-{% endcomment %}{% schema %}
-  {
-    "name": "Product pages",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "dynamic_buttons_checkbox",
-        "label": "Enable Dynamic Buttons",
-        "default": false
-      }
-    ]
-  }
-{% endschema %}
+{% render 'product-recommendations' %}

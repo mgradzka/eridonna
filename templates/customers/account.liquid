@@ -1,4 +1,10 @@
 <!-- /templates/customers/account.liquid -->
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+  {% include 'breadcrumbs' %}
+  </div>
+</div>
+
 <div class="container my-5">
   <h1 class="mb-3">Account</h1>
   <div class="row">
@@ -6,10 +12,33 @@
       <h6>Account details</h6>
       {% if customer.default_address %}
         <p>{{ customer.default_address | format_address }}</p>
-        <a href="{{routes.account_addresses_url}}" class="btn btn-light">View addresses
+        <a href="{{routes.account_addresses_url}}" class="button btn-light">View addresses
           <span class="badge bg-success">{{ customer.addresses_count }}</span>
         </a>
+        
       {% endif %}
+      <a class="nav-link" href="{{routes.account_logout_url}}">Logout</a>
+      <a
+      href="#recover"
+      id="forgotPassword"
+      class="text-center">Forgot your password?</a>
+      {% form 'recover_customer_password' %}
+        {% include 'form-error', form: form %}
+  
+        <div class="col-12">
+          <label for="resetPassword" class="form-label">Email Address</label>
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            id="resetPassword">
+        </div>
+  
+        <input
+          type="submit"
+          value="Reset Password"
+          class="button btn-secondary">
+      {% endform %}
     </div>
     <div class="col-12 col-md-8">
       <div class="customer_orders">

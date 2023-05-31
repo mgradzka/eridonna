@@ -1,5 +1,6 @@
 <!-- /templates/customers/activate_account.liquid -->
 <div class="container my-5">
+    {% include 'breadcrumbs' %}
     <h1 class="lead">Activate Account</h1>
     <div class="row">
         {% form 'activate_customer_password' %}
@@ -15,13 +16,13 @@
             </div>
 
             <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100 rounded-0">Activate Account</button>
+                <button type="submit" class="button btn-primary w-100 rounded-0">Activate Account</button>
             </div>
 
             <p class="text-center">or</p>
 
             <div class="col-12">
-                <input type="submit" name="decline" class="btn btn-primary w-100 rounded-0" value="Decline Invitation">
+                <input type="submit" name="decline" class="button btn-primary w-100 rounded-0" value="Decline Invitation">
             </div>
         {% endform %}
     </div>

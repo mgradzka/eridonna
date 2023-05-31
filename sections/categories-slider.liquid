@@ -1,0 +1,164 @@
+{% comment %}
+https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeveloper
+{% endcomment %}
+
+{%- capture flickity_options -%}
+  {
+  "prevNextButtons": true,
+                                          "contain": true,
+                                          "cellAlign": "left",
+                                          "groupCells": true,
+                                          "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
+                                          "wrapAround": true
+                                        }{%- endcapture -%}
+
+<div class="featured-collection-slider categories-slider mt-5">
+  {% if section.settings.title != blank %}
+    <div class="section-header">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </div>
+  {% endif %}
+
+  {% comment %}
+
+  {%- assign collection = collections[section.settings.collection] -%}
+  {%- assign product_limit = section.settings.product_count -%}
+  {% endcomment %}
+
+
+
+  {% assign text_blocks = section.blocks | where: 'type', 'text' %}
+  {% if text_blocks != blank %}
+    <div class=" products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
+
+      {% for block in text_blocks %}
+        <article class="carousel-cell categories-slide">
+          <a href="{{ block.settings.url }}">
+            <img
+              class="categories-slider-img"
+              src="{{ block.settings.image | img_url: 'master' }}"
+              alt="{{ block.settings.image.alt }}">
+            <div class="backdrop-blur">
+              <h4 class="text-center mb-0">{{ block.settings.title }}</h4>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
+
+  {% assign image_blocks = section.blocks | where: 'type', 'image' %}
+
+
+  {% comment %}
+    
+  {% endcomment %}
+
+  {% if image_blocks != blank %}
+    <div class=" gifts-carousel js-flickity" data-flickity='{{ flickity_options }}'>
+
+
+      {% for block in image_blocks %}
+        <article class="carousel-cell gift-slide">
+          <a href="{{ block.settings.url }}">
+            <img
+            class="gift-img categories-slider-img"
+              src="{{ block.settings.image | img_url: 'master' }}"
+              alt="{{ block.settings.image.alt }}">
+            <div class="backdrop-blur">
+              <h4 class="text-center">{{ block.settings.title }}</h4>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+
+
+</div>
+
+{% schema %}
+  {
+    "name": "Collection list slideshow",
+
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Collection list slideshow"
+      }
+
+    ],
+    "blocks": [
+      {
+        "name": "For over 3 slides",
+        "type": "text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "title"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label"
+          }, {
+            "type": "text",
+            "id": "url",
+            "label": "Collection url"
+          }
+
+        ]
+      }, {
+        "name": "For less than slides",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "title"
+          }, {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label"
+          }, {
+            "type": "text",
+            "id": "url",
+            "label": "Collection url"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection list",
+        "settings": {
+          "title": "Collection list"
+        },
+        "blocks": [
+          {
+            "type": "text"
+          }, {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% comment %}
+schema creates customizable settings
+{% endcomment %}

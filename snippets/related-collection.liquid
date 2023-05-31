@@ -1,0 +1,38 @@
+<div class="featured-collection-header">
+  <h3>{{ current_collection.title }}</h3>
+  <a href="{{ current_collection.url}}">
+    <span>View all</span>
+  </a>
+</div>
+<div class="featured-collection-container">
+  {% for product in current_collection.products limit: 4 %}
+    {% assign image = product.featured_media.preview_image %}
+    <a href="{{ product.url }}" class="featured-collection-article mx-200">
+      <div class="product-container">
+        {% if image != blank %}
+          <img
+            class="featured-collection-img"
+            src="{{ image | img_url: 'medium' }}"
+            alt="{{ product.title }}">
+          <span
+            id="productInfoAnchor"
+            class=" py-200 icon"
+            data-icon="true"
+            product-handle="{{ product.handle }}">
+            {% render 'add-to-cart' %}
+          </span>
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
+        {% endif %}
+      </div>
+      <div>
+        <p>
+          {{ product.metafields.custom.brand }}
+        </p>
+
+        <h3>{{ product.title }}</h3>
+        <p>{{ product.price | money_without_trailing_zeros }}</p>
+      </div>
+    </a>
+  {% endfor %}
+</div>

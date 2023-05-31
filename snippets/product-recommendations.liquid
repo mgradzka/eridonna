@@ -1,0 +1,55 @@
+<div class="container">
+    <section id="product_recommendation" class="row content-justify-center my-5">
+      <div class="text-center"><h1>You may also like this</h1></div>
+      <div id="product_recommendation_body" class="row">
+  
+      </div>
+    </section>
+  </div>
+  
+  <script>
+    const productRecommendationBody = document.getElementById('product_recommendation_body');
+  
+    fetch('/recommendations/products.json?product_id={{ product.id }}&limit=4')
+    .then(resp => resp.json())
+    .then(({ products }) => {
+  
+      if(products.length > 0) {
+        products.forEach(function(product, index) {
+          let card;
+  
+          card = '<article class="col-3 g-2"><a href="' + product.url + '">'
+         
+          
+          if(product.images.length > 0) {
+            card += '<div class="background-effect"><img class="collection-page-img" src="' + product.images[0] + '"></div>';
+          }
+  
+          card += '<div class="product-content p-2">';
+          card += '<h3>' + product.title + '</h3>';
+          card += `
+          <p class="collection-page__brand">
+            {{ product.metafields.custom.brand }} | {{ product.type }}</p>
+          <div class="flex justify-content-between collection-page__money">
+            {% if product.available %}
+              <div class="flex align-items-baseline gap-2">
+                <div class="dot green-dot"></div>
+                <p>In Stock</p>
+              </div>
+
+            {% else %}
+              <div class="flex align-items-baseline gap-2">
+                <div class="dot red-dot"></div>
+                <p>Not In-Stock</p>
+              </div>
+            {% endif %}
+            <p>{{ product.price | money_without_trailing_zeros }}</p>
+          </div>
+          `
+          card += '</div></a></article>';
+  
+          productRecommendationBody.innerHTML += card;
+        });
+      }
+    });
+  </script>

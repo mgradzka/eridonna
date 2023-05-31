@@ -1,0 +1,58 @@
+<section class="container mt-5 teaser-info">
+  <div class="flex flex-column-reverse flex-md-row gap-4 justify-content-left">
+    <div class="align-self-center">
+      <h2 class="mb-3">{{ section.settings.title }}</h2>
+      <p class="mb-4">{{ section.settings.paragraph }}</p>
+      <a class="button btn-main" href="{{ section.settings.url}}">{{ section.settings.button_label }}</a>
+    </div>
+    <div class="image-stack">
+      <div class="image-stack__item image-stack__item--top">
+        <img src="{{ section.settings.image | img_url: 'master' }}" alt="{{ section.settings.title }}">
+      </div>
+      <div class="image-stack__item image-stack__item--bottom">
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Teaser",
+    "class": "Teaser-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "paragraph",
+        "label": "paragraph"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button Label"
+      },
+      {
+        "type": "text",
+        "id": "url",
+        "label": "Page url"
+      }, {
+        "type": "image_picker",
+        "id": "image",
+        "label": "image"
+      }
+    ],
+
+    "presets": [
+      {
+        "category": "Teasers",
+        "name": "Teaser"
+      }
+    ]
+  }
+{% endschema %}

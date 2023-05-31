@@ -1,13 +1,16 @@
-<div class="row justify-content-center">
-    <div class="flex justify-content-start"><span class="material-symbols-outlined pe-1">sort</span> Sort by</div>
-
-    <select name="sorting" id="sort_by" class="form-select form-select-sm w-25">
+    <div class="flex gap-1">
+   
+   {% comment %}
+    
+   <span class="material-symbols-outlined pe-1">sort</span> <p class="sort-by me-1">Sort by</p>   
+   {% endcomment %}
+      <select name="sorting" id="sort_by" class="form-select form-select-sm">
       {% for option in collection.sort_options %}
         <option value="{{ option.value }}" 
             {% if option.value == collection.sort_by %}
               selected
             {% endif %}
-        >{{ option.name }}</option>
+        >   Sort by: {{ option.name }} </option>
       {% endfor %}
     </select>
-  </div>
+    </div>

@@ -18,14 +18,39 @@
   </head>
   <body>
     {% section 'header' %}
+    {% include 'swymSnippet' %}
 
-    <main role="main">
+    <main
+      role="main"
+      id="main"
+      class="margin-top">
+      <button id="scrollToTopButton">
+
+        <svg
+          width="70"
+          height="70"
+          viewBox="0 0 70 70"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle
+            cx="35"
+            cy="35"
+            r="33.5"
+            fill="white"
+            stroke="#372C28"
+            stroke-width="3" />
+          <path d="M33.7174 17.6L33.7174 53.4148C33.7174 54.1742 34.3323 54.7891 35.0916 54.7891C35.8509 54.7891 36.4658 54.1742 36.4658 53.4148L36.4658 17.6C36.4658 16.8407 35.8509 16.2258 35.0916 16.2258C34.3323 16.2258 33.7174 16.8407 33.7174 17.6006L33.7174 17.6Z" fill="#372C28" />
+          <path d="M22.9999 27.7473C22.9999 28.1532 23.1789 28.5546 23.5215 28.8256C24.1172 29.2967 24.9814 29.1957 25.4525 28.6L28.8337 24.3245L34.9627 17.4566L44.7625 28.8012C45.2592 29.3759 46.1271 29.4391 46.7012 28.9431C47.2758 28.4465 47.3378 27.5772 46.8431 27.0045L36.0206 14.4773C35.7623 14.1775 35.3871 14.0043 34.9908 14.0011C34.5952 13.9985 34.2174 14.1654 33.9548 14.46L26.7303 22.5583L23.296 26.8951C23.0966 27.1482 23.0001 27.4499 23.0001 27.7471L22.9999 27.7473Z" fill="#372C28" />
+        </svg>
+
+      </button>
+
+
       {{ content_for_layout }}
     </main>
     {% section 'footer-section' %}
 
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css"> 
-<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-<script src="https://kit.fontawesome.com/81264b6916.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
   </body>
 </html>

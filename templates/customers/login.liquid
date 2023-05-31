@@ -1,30 +1,62 @@
 <!-- /templates/customers/login.liquid -->
 
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+    {% include 'breadcrumbs' %}
+  </div>
+</div>
 <div class="container py-5 my-5">
-    <div class="login-form">
-        {% form 'customer_login' %}
-            {% include 'form-error', form: form %}
-            <h1 class="h3">Customer Login</h1>
-            <label for="emailAddress">Email Address</label>
-            <input type="email" name="customer[email]" class="form-control rounded-0 my-2">
-            <label for="password">Password</label>
-            <input type="password" name="customer[password]" class="form-control rounded-0 my-2">
 
-            <input type="submit" value="Sign in" class="btn btn-primary btn-lg w-100 rounded-0">
-        {% endform %}
 
-        <a href="#recover" id="forgotPassword" class="text-center">Forgot your password?</a>
-    </div>
-    <div id="forgot_password_form" class="forgot-password-form d-none">
-        {% form 'recover_customer_password' %}
-            {% include 'form-error', form: form %}
 
-            <div class="col-12">
-                <label for="resetPassword" class="form-label">Email Address</label>
-                <input class="form-control" type="email" name="email" id="resetPassword">
-            </div>
+  <div class="login-form">
+    {% form 'customer_login' %}
+      {% include 'form-error', form: form %}
+      <h1 class="h3">Welcome back!<br>Sign in to your account</h1>
+      <label for="emailAddress">Email Address</label>
+      <input
+        type="email"
+        name="customer[email]"
+        class="form-control rounded-0 my-2">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="customer[password]"
+        class="form-control rounded-0 my-2">
 
-            <input type="submit" value="Reset Password" class="btn btn-secondary">
-        {% endform %}
-    </div>
+      <input
+        type="submit"
+        value="Log In"
+        class="button btn-main">
+    {% endform %}
+
+    <a
+      href="#recover"
+      id="forgotPassword"
+      class="text-center">Forgot your password?</a>
+  </div>
+  <div id="forgot_password_form" class="forgot-password-form mt-1 d-none">
+    {% form 'recover_customer_password' %}
+      {% include 'form-error', form: form %}
+
+      <div class="col-12">
+        <label for="resetPassword" class="form-label">Email Address</label>
+        <input
+          class="form-control"
+          type="email"
+          name="email"
+          id="resetPassword">
+      </div>
+
+      <input
+        type="submit"
+        value="Reset Password"
+        class="button btn-secondary">
+    {% endform %}
+
+  </div>
+  <div class="flex register-form gap-2">
+    <p>Don't have an account yet?</p>
+    <a href="{{routes.account_register_url}}">Register</a>
+  </div>
 </div>

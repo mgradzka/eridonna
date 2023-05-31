@@ -1,7 +1,7 @@
 /* .swym-details, .swym-notification-wishlist {
   color: red !important;
 } */
-
+/* 
 #swym-notification,
 .swym-details,
 .swym-notification-wishlist {
@@ -23,4 +23,16 @@
 
 .favorite {
   font-size: 20px;
+} */
+
+.swym-btn-container .swym-add-to-wishlist:after {
+  content: url('heart.svg') !important
+}
+
+.swym-fave-count {
+  display: none !important
+}
+
+.swym-btn-container .swym-add-to-wishlist.swym-added:after {
+  opacity: 1 !important;
 }

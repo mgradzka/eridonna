@@ -5,52 +5,58 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
 {%- capture flickity_options -%}
   {
   "prevNextButtons": true,
-        "contain": true,
-        "cellAlign": "left",
-        "groupCells": true,
-        "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
-        "wrapAround": true
-      }{%- endcapture -%}
+              "contain": true,
+              "cellAlign": "left",
+              "groupCells": true,
+              "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
+              "wrapAround": true
+            }{%- endcapture -%}
 
-<div class="featured-collection-slider p-4 page-width">
+<div class="featured-collection-slider categories-slider mt-5 page-width ">
   {% if section.settings.title != blank %}
-    <div class="section-header text-center">
+    <div class="section-header">
       <h2>{{ section.settings.title | escape }}</h2>
     </div>
   {% endif %}
 
   {% comment %}
-    loop through collections (with its names and images)
-  {% endcomment %}
+
   {%- assign collection = collections[section.settings.collection] -%}
   {%- assign product_limit = section.settings.product_count -%}
+  {% endcomment %}
 
   <div class="products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
-    {% for product in collection.products limit: product_limit %}
-      <article class="carousel-cell card rounded-0 m-2 p-2">
-        <a href="{{ product.url | within: collection }}">
-          <img class="img-explore" src="{{ product.featured_image | img_url: 'master'}}">
-          <h4>{{ product.title }}</h4>
-          <p>{{ product.price | money }}</p>
-        </a>
+
+    {% for article in blogs.eridonna-inspires.articles %}
+
+      <article class="carousel-cell  categories-slide">
+        <div>
+          <a href="{{ article.url }}">
+            <img class="categories-slider-img" src=" {{ article.image | img_url: 'master' }} ">
+            <div class="backdrop-blur">
+              <h4 class="blog-slider-title">{{ article.title }}</h4>
+            </div>
+          </a>
+        </div>
       </article>
+
     {% endfor %}
   </div>
 </div>
 
 {% schema %}
   {
-    "name": "Collection Slider",
+    "name": "Blog Slider",
     "settings": [
       {
         "type": "text",
         "id": "title",
         "label": "Heading",
-        "default": "Featured Collection"
+        "default": "Eridonna Inspires"
       }, {
-        "type": "collection",
-        "id": "collection",
-        "label": "Collection"
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
       }, {
         "type": "range",
         "id": "product_count",
@@ -62,8 +68,8 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
     ],
     "presets": [
       {
-        "category": "Collection",
-        "name": "Collection Slider",
+        "category": "Blog",
+        "name": "Blog Slider",
         "settings": {}
       }
     ]

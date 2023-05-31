@@ -1,0 +1,129 @@
+<div class="position-relative py-4 px-1  brand-template__background">
+  {% include 'breadcrumbs' %}
+  <div class="col-md-5 mx-auto my-5 text-center ">
+    <h1>
+      {{ section.settings.title }}</h1>
+    <p class="lead">
+      {{ section.settings.paragraph1 }}
+    </p>
+    <p>{{ section.settings.paragraph2 }}
+    </p>
+  </div>
+</div>
+
+<div class="container my-5 p-2">
+
+  {% paginate blog.articles by 6 %}
+
+    {% for article in blog.articles %}
+
+        {% if article.tags.size > 0 %}
+          <h2>Most Recent Blog Post</h2>
+          <article class="mb-4">
+            <a href="{{ article.url }}">
+              <div class="content main-article-container">
+                {% if article.image.src != null %}
+                  <img
+                    src="{{article.image.src | img_url: 'master'}}"
+                    class=" mb-4"
+                    alt="{{article.image.alt}}">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'card-img-top' }}
+
+                {% endif %}
+                <div class="article-text">
+                  <h2>
+                    {{ article.title }}
+                  </h2>
+                  {{ article.created_at | date: format: 'abbreviated_date' }}
+                  <p class="card-text">
+                    {% if article.excerpt.size > 0 %}
+                      {{ article.excerpt }}
+                    {% else %}
+                      <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                    {% endif %}
+                  </div>
+                </p>
+              </div>
+            </a>
+          </article>
+
+        {% endif %}
+    {%- endfor %}
+
+
+    <h2>All Blog Posts</h2>
+
+
+    {% for article in blog.articles %}
+
+      {% if article.tags.size == 0 %}
+        
+      
+
+          <article class="mb-4">
+            <a href="{{ article.url }}">
+              <div class="content flex flex-column flex-md-row gap-4">
+                {% if article.image.src != null %}
+                  <img
+                    src="{{article.image.src | img_url: 'master'}}"
+                    class="blog-img mb-4"
+                    alt="{{article.image.alt}}">
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag: 'card-img-top' }}
+
+                {% endif %}
+                <div>
+                  <h2>
+                    {{ article.title }}
+                  </h2>
+                  {{ article.created_at | date: format: 'abbreviated_date' }}
+                  <p class="card-text">
+                    {% if article.excerpt.size > 0 %}
+                      {{ article.excerpt }}
+                    {% else %}
+                      <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+                    {% endif %}
+                  </div>
+                </p>
+              </div>
+            </a>
+          </article>
+     
+        {% endif %}
+    {%- endfor %}
+
+
+    {% render 'pagination', paginate: paginate %}
+
+  {% endpaginate %}
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Blog Header",
+    "class": "blog-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }, {
+        "type": "richtext",
+        "id": "paragraph1",
+        "label": "first paragraph1"
+      }, {
+        "type": "text",
+        "id": "paragraph2",
+        "label": "second paragraph1"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blog Header"
+      }
+    ]
+  }
+{% endschema %}

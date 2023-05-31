@@ -1,10 +1,16 @@
 <!-- /templates/customers/addresses.liquid -->
 
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+    {% include 'breadcrumbs' %}
+  </div>
+</div>
+
 <div class="container my-5">
 
   <h2 class="lead">My addresses</h2>
   <button
-    class="btn btn-primary rounded-0"
+    class="button btn-primary rounded-0"
     data-bs-toggle="modal"
     data-bs-target="#newAddressModal">Create new address</button>
   <div class="row row-cols-md-4 row-cols-1 my-5 gx-2">
@@ -20,7 +26,7 @@
               method="post"
               data-confirm-message="Delete Address">
               <input type="hidden" name="_method" value="delete">
-              <button class="btn btn-danger">Delete</button> 
+              <button class="button btn-danger">Delete</button> 
               </form>
           </div>
         </div>
@@ -153,7 +159,7 @@
 
 
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Create address</button>
+          <button type="submit" class="button btn-primary">Create address</button>
         </div>
       </div>
     </div>

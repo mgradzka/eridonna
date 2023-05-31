@@ -1,0 +1,227 @@
+<section class="brand-template">
+  <div class="position-relative py-4 px-1 brand-template__background">
+    {% include 'breadcrumbs' %}
+    <div class="col-md-5 mx-auto my-5 text-center ">
+      <h1>
+        {{ section.settings.title }}</h1>
+      <p class="lead">
+        {{ section.settings.paragraph1 }}
+      </p>
+      <p>{{ section.settings.paragraph2 }}
+      </p>
+    </div>
+  </div>
+
+  <div class="container ">
+    <div class="mb-4">
+      <button id="allButton" class="button btn-sec">All brands</button>
+      <button id="jewelryButton" class="button btn-sec">Jewelry</button>
+      <button id="watchesButton" class="button btn-sec">Watches</button>
+    </div>
+
+    {% assign jewelry = section.blocks | where: 'type', 'text' %}
+    <h2 data-category="jewelry" class="article">Jewelry</h2>
+
+
+    {% for block in jewelry %}
+      <article data-category="jewelry" class="flex article gap-4 my-4 py-4">
+        <img
+          class="img-fluid"
+          src="{{ block.settings.image | img_url: 'master' }}"
+          alt="">
+        <div class="flex flex-column brand-template-info">
+          <h3>{{ block.settings.title }}</h3>
+          <span class="mb-4">{{ block.settings.adjective1 }} | {{ block.settings.adjective2 }} | {{ block.settings.adjective3 }}</span>
+
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+
+
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseOne"
+                  aria-expanded="true"
+                  aria-controls="flush-collapseOne">
+                  <h5>General Description
+                  </h5>
+                </button>
+              </div>
+              <div id="flush-collapseOne" class="accordion-collapse collapse show ">
+                <div class="accordion-body">{{ block.settings.sub-text1 }}</div>
+              </div>
+            </div>
+
+
+            <div class="accordion-item">
+              <div class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#flush-collapseTwo"
+                  aria-expanded="true"
+                  aria-controls="flush-collapseTwo">
+                  <h5>Technical Information
+                  </h5>
+                </button>
+              </div>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse show ">
+                <div class="accordion-body">{{ block.settings.sub-text2 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    {% endfor %}
+
+
+    {% assign watches = section.blocks | where: 'type', 'image' %}
+
+    <h2 data-category="watches" class="article">Watches</h2>
+    {% for block in watches %}
+      <article data-category="watches" class="flex article gap-4 my-4">
+        <img
+          class="img-fluid"
+          src="{{ block.settings.image | img_url: 'master' }}"
+          alt="">
+        <div class="flex flex-column">
+          <h3>{{ block.settings.title }}</h3>
+          <span class="mb-4">{{ block.settings.adjective1 }} | {{ block.settings.adjective2 }} | {{ block.settings.adjective3 }}</span>
+          <h5>General Description
+            <span class="material-symbols-outlined">
+              expand_more
+            </span>
+          </h5>
+          <p>{{ block.settings.sub-text1 }}</p>
+          <h5>Technical Information
+            <span class="material-symbols-outlined">
+              expand_more
+            </span>
+          </h5>
+          <p>{{ block.settings.sub-text2 }}</p>
+        </div>
+      </article>
+
+    {% endfor %}
+
+  </div>
+
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Brands",
+    "class": "brands-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }, {
+        "type": "richtext",
+        "id": "paragraph1",
+        "label": "first paragraph1"
+      }, {
+        "type": "text",
+        "id": "paragraph2",
+        "label": "second paragraph1"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Jewelry brand",
+        "type": "text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "title"
+          },
+          {
+            "type": "text",
+            "id": "adjective1",
+            "label": "Adjective 1"
+          },
+          {
+            "type": "text",
+            "id": "adjective2",
+            "label": "Adjective 2"
+          }, {
+            "type": "text",
+            "id": "adjective3",
+            "label": "Adjective 3"
+          }, {
+            "type": "richtext",
+            "id": "sub-text1",
+            "label": "General Description Text"
+          }, {
+            "type": "richtext",
+            "id": "sub-text2",
+            "label": "Technical Description Text"
+          }
+
+        ]
+      }, {
+        "name": "Watches brand",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "title"
+          },
+          {
+            "type": "text",
+            "id": "adjective1",
+            "label": "Adjective 1"
+          },
+          {
+            "type": "text",
+            "id": "adjective2",
+            "label": "Adjective 2"
+          }, {
+            "type": "text",
+            "id": "adjective3",
+            "label": "Adjective 3"
+          }, {
+            "type": "richtext",
+            "id": "sub-text1",
+            "label": "General Description Text"
+          }, {
+            "type": "richtext",
+            "id": "sub-text2",
+            "label": "Technical Description Text"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Delivery",
+        "blocks": [
+          {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

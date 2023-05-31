@@ -1,0 +1,124 @@
+<div class="position-relative  py-4 px-1 brand-template__background">
+  {% include 'breadcrumbs' %}
+  <div class="col-md-5 mx-auto my-5 text-center ">
+    <h1>
+      {{ section.settings.title }}</h1>
+    <p class="lead">
+      {{ section.settings.paragraph1 }}
+    </p>
+    <p>{{ section.settings.paragraph2 }}
+    </p>
+  </div>
+</div>
+<section class="container">
+
+  {% assign mainSection = section.blocks | where: 'type', 'image' %}
+
+  {% for block in mainSection %}
+
+    <div class=" flex flex-column flex-lg-row gap-4">
+      <div>
+        <h2>{{ block.settings.title }}</h2>
+        <p>{{ block.settings.description }}
+        </p>
+      </div>
+      <img
+        class="img-fluid about-us-img"
+        src="{{ block.settings.image | img_url: 'master'}}"
+        alt="">
+    </div>
+  {% endfor %}
+  <hr>
+
+
+  {% assign aboutSections = section.blocks | where: 'type', 'text' %}
+  {% for block in aboutSections %}
+
+    <article class="mb-4">
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.introduction }}
+      </p>
+    </article>
+  {% endfor %}
+
+  <h3>See More on our Social Media</h3>
+</section>
+
+
+{% schema %}
+  {
+    "name": "About us",
+    "class": "about-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },  {
+        "type": "richtext",
+        "id": "paragraph1",
+        "label": "first paragraph1"
+      }, {
+        "type": "text",
+        "id": "paragraph2",
+        "label": "second paragraph1"
+      }
+
+
+    ],
+    "blocks": [
+      {
+        "name": "Main",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "About us img"
+          }, {
+            "type": "text",
+            "id": "title",
+            "label": "title"
+          }, {
+            "type": "richtext",
+            "id": "description",
+            "label": "description"
+          }
+
+        ]
+      }, {
+        "name": "Section",
+        "type": "text",
+        "settings": [
+         {
+            "type": "text",
+            "id": "title",
+            "default": "Example About us Heading",
+            "label": "About us Title"
+          }, {
+            "type": "richtext",
+            "id": "introduction",
+            "default": "<p>Example Paragraph</p>",
+            "label": "Introduction Description"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "About us",
+        "settings": {
+          "title": "About us"
+        },
+        "blocks": [
+          {
+            "type": "image"
+          }, {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

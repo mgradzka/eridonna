@@ -1,5 +1,24 @@
 // Put your application javascript here
 
+window.addEventListener('scroll', function() {
+  const scrollToTopButton = document.getElementById('scrollToTopButton');
+  if (window.pageYOffset > 200) { // Adjust the value as needed
+    scrollToTopButton.style.display = 'block';
+  } else {
+    scrollToTopButton.style.display = 'none';
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const scrollToTopButton = document.getElementById('scrollToTopButton');
+  scrollToTopButton.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+
 if (document.getElementById("sort_by") != null) {
   document.querySelector("#sort_by").addEventListener("change", function (e) {
     const url = new URL(window.location.href);
@@ -104,3 +123,240 @@ menuElm.addEventListener("click", function (event) {
     fontawesome.textContent = "close";
   }
 });
+
+// const slideShow = document.querySelector('#slideShow');
+
+// if(slideShow != null) {
+//   const tabContainer = document.querySelector('.tab-title-container')
+//   const slideContainer = document.querySelectorAll('.slide-container');
+//   const tabs = document.querySelectorAll('.tab');
+//   const activeBackground = document.querySelector('.active-slide');
+
+//   tabContainer.addEventListener('click', e => {
+//     const clicked = e.target.closest('.tab');
+
+//     if(!clicked) return;
+
+//     const slideId = clicked.dataset.slide;
+
+//     const distance = (tabs[0].getBoundingClientRect().left - tabs[2].getBoundingClientRect().left) / 2;
+
+//     switch (slideId) {
+//       case "1":
+//         activeBackground.style.transform = `translateX(${distance}px)`
+//       break;
+//       case "2":
+//         activeBackground.style.transform = `translateX(0px)`
+//       break;
+//       case "3":
+//         activeBackground.style.transform = `translateX(${-distance}px)`
+//       break;
+
+//       default:
+//         break;
+//     }
+
+//     tabs.forEach(tab => tab.classList.remove('active-tab'))
+//     clicked.classList.add('active-tab')
+//     setSliders(slideId)
+//   })
+
+//   const setSliders = (id) => {
+//     const title = document.querySelector('.slider-title')
+//     switch (id) {
+//         case '1':
+//             title.innerHTML = 'Did you know? <span>#Sustainability</span>'
+//         break;
+//         case '2':
+//             title.innerHTML = 'Did you know? <span>#BenefitsOfSecondHand</span>'
+//         break;
+//         case '3':
+//             title.innerHTML = 'Did you know? <span>#OurCleaningProcess</span>'
+//         break;
+
+//         default:
+//             break;
+//     }
+
+//     slideContainer.forEach(slide => {
+//         if(slide.dataset.slide != id) {
+//             slide.classList.add('hide')
+//         } else if (slide.dataset.slide === id) {
+//             slide.classList.remove('hide')
+//         }
+//     })
+//   }
+
+// }
+
+const filterContainer = document.querySelector(".filter-container");
+const filterIcon = document.getElementById("filter-icon");
+const filterActive = "opened";
+const filterText = document.querySelector(".show-filters");
+
+if (filterIcon) {
+  filterIcon.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    if (filterContainer.className.indexOf("opened") === -1) {
+      filterContainer.classList.add(filterActive);
+      filterText.innerHTML = "Hide filters";
+    } else {
+      filterContainer.classList.remove(filterActive);
+      filterText.innerHTML = "Show filters";
+    }
+  });
+}
+
+// const generalDescription = document.querySelector('.general-description')
+// const technicalInformation = document.querySelector('.technical-description')
+// const generalText = document.querySelector('.general-description-text')
+// const technicalText = document.querySelector('.technical-description-text')
+
+// if (generalDescription) {
+//   generalDescription.addEventListener('click', (e) => {
+//     if (generalText.className.indexOf("display-none") === -1) {
+//       generalText.classList.add("display-none");
+//     } else {
+//       generalText.classList.remove("display-none");
+//     }
+//   })
+// }
+
+const allButton = document.getElementById("allButton");
+const watchesButton = document.getElementById("watchesButton");
+const jewelryButton = document.getElementById("jewelryButton");
+
+if (allButton && watchesButton && jewelryButton) {
+  allButton.addEventListener("click", function () {
+    showAllArticles();
+    setActiveButton(allButton);
+  });
+
+  watchesButton.addEventListener("click", function () {
+    showWatchesArticles();
+    setActiveButton(watchesButton);
+  });
+
+  jewelryButton.addEventListener("click", function () {
+    showJewelryArticles();
+    setActiveButton(jewelryButton);
+  });
+}
+
+// Check if the articles exist before performing operations on them
+const articles = document.getElementsByClassName("article");
+
+if (articles) {
+  function showAllArticles() {
+    for (let i = 0; i < articles.length; i++) {
+      articles[i].style.display = "flex";
+    }
+  }
+
+  function showWatchesArticles() {
+    for (let i = 0; i < articles.length; i++) {
+      if (articles[i].getAttribute("data-category") === "watches") {
+        articles[i].style.display = "flex";
+      } else {
+        articles[i].style.display = "none";
+      }
+    }
+  }
+
+  function showJewelryArticles() {
+    for (let i = 0; i < articles.length; i++) {
+      if (articles[i].getAttribute("data-category") === "jewelry") {
+        articles[i].style.display = "flex";
+      } else {
+        articles[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function setActiveButton(button) {
+  if (allButton && watchesButton && jewelryButton) {
+    allButton.classList.remove("active");
+    watchesButton.classList.remove("active");
+    jewelryButton.classList.remove("active");
+
+    button.classList.add("active");
+  }
+}
+
+const productPage = document.querySelector("#productPage");
+
+if (productPage != null) {
+  const slider = document.querySelector(".slider");
+  const prevButton = document.querySelector(".prev-button");
+  const nextButton = document.querySelector(".next-button");
+  const imageWidth = slider.offsetWidth;
+  let slideIndex = 0;
+
+  prevButton.addEventListener("click", () => {
+    slideIndex--;
+    if (slideIndex < 0) {
+      slideIndex = 3;
+    }
+    updateSliderPosition();
+  });
+
+  nextButton.addEventListener("click", () => {
+    slideIndex++;
+    if (slideIndex > 3) {
+      slideIndex = 0;
+    }
+    updateSliderPosition();
+  });
+
+  function updateSliderPosition() {
+    const newPosition = -slideIndex * imageWidth;
+    slider.style.transform = `translateX(${newPosition}px)`;
+  }
+
+  const minus = document.querySelector(".btn-subtract");
+  const add = document.querySelector(".btn-add");
+  const quantityNumber = document.querySelector(".item-quantity");
+  let currentValue = 1;
+  const minimum = 1;
+
+  minus.addEventListener("click", () => {
+    if (quantityNumber > minimum) {
+      currentValue -= 1;
+      quantityNumber.value = currentValue;
+      console.log(currentValue);
+    }
+  });
+
+  add.addEventListener("click", () => {
+    currentValue += 1;
+    quantityNumber.value = currentValue;
+    console.log(currentValue);
+  });
+
+  window.addEventListener("scroll", function () {
+    const container = document.querySelector(".product-page-container");
+    const imageWrapper = document.querySelector(".product-image-wrapper");
+    const containerOffsetTop = container.offsetTop;
+    const containerHeight = container.offsetHeight;
+    const scrollTop = window.scrollY;
+
+    const maxScrollTop =
+      containerOffsetTop + containerHeight - imageWrapper.offsetHeight;
+
+    if (scrollTop > containerOffsetTop && scrollTop < maxScrollTop) {
+      imageWrapper.classList.add("sticky");
+    } else {
+      imageWrapper.classList.remove("sticky");
+    }
+  });
+}
+
+const collectionPage = document.querySelector(".collection-page");
+const navbar = document.querySelector(".navbar");
+const mainContent = document.querySelector("main");
+if (collectionPage) {
+  navbar.classList.remove("fixed-top");
+  mainContent.classList.remove("margin-top");
+}
