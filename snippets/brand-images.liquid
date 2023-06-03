@@ -1,0 +1,35 @@
+{%- case product.metafields.custom.brand -%}
+            {%- when 'TI SENTO' -%}
+            <a href="/pages/brands"><img
+              src="{{ 'tisento.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img mb-4">
+              </a>
+
+            {%- when 'Coeur de Lion' -%}
+                <a href="/pages/brands"><img
+              src="{{ 'coeur-de-lion.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img mb-4">
+              </a>
+            {%- when 'DYRBERG/KERN' -%}
+                <a href="/pages/brands"><img
+              src="{{ 'dyrberg.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img mb-4"></a>
+            {%- when 'Brosway' -%}
+                <a href="/pages/brands"> <img
+              src="{{ 'brosway.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img mb-4"></a>
+            {%- when 'GANT' -%}
+                <a href="/pages/brands"><img
+              src="{{ 'gant.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img mb-4"></a>
+            {%- when 'Pierre Lannier' -%}
+                <a href="/pages/brands"> <img
+              src="{{ 'pierre.png' | asset_url }}"
+              alt="Logo"
+              class="brand-img"></a>
+          {%- endcase -%}

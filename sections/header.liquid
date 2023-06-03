@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-expand-lg bg-white container-fluid p-3">
+<nav class="navbar fixed-top navbar-expand-lg bg-white container-fluid py-3">
 
   <button
     class="navbar-toggler"
@@ -19,27 +19,21 @@
   <a href="/">
     <img src="{{section.settings.image | img_url: 'small' }}" alt="{{section.settings.image.alt}}">
   </a>
-  <div class="flex align-items-center nav-icons-mobile">
+  <div class="flex align-items-center nav-icons-mobile  gap-3">
     <a
       class="nav-link"
       href="#swym-wishlist"
       class="swym-wishlist">
-      <span class="material-symbols-outlined nav-icons">
-
-        favorite
-
-      </span>
+      {% render 'heart-icon' %}
     </a>
-    
+
     <a class="nav-link" href="{{routes.account_url}}">
-      <span class="material-symbols-outlined nav-icons">
-        person
-      </span>
+      {% render 'account-icon' %}
     </a>
 
     <div>
       <a class="nav-link" href="/cart">
-        <span class="material-symbols-outlined nav-icons">shopping_bag</span>
+        {% render 'cart-icon' %}
         <span id="numberOfCartItem1" class="badge bg-secondary rounded-pill">0</span>
       </a>
     </div>
@@ -47,6 +41,10 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto">
+      <div class="search-mobile">
+        {% render 'search-nav' %}
+
+      </div>
       {% for link in linklists.main-menu.links %}
         {% assign child_list_handle = link.title | handleize %}
 
@@ -63,11 +61,11 @@
             </a>
 
 
-            <ul class="dropdown-menu bg-white">
+            <ul class="dropdown-menu">
 
               {% for childlink in linklists[child_list_handle].links %}
-                <li class="nav-item px-3">
-                  <a class="dropdown-item" href="{{ childlink.url }}">{{ childlink.title | escape }}
+                <li class="nav-item">
+                  <a class="dropdown-item px-0" href="{{ childlink.url }}">{{ childlink.title | escape }}
                   </a>
                 </li>
               {% endfor %}
@@ -76,95 +74,60 @@
           </li>
 
         {% else %}
-          <li class="nav-item px-2">
+          <li class="nav-item">
             <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
           </li>
         {% endif %}
       {% endfor %}
 
-
-    </div>
-
-    {% comment %}
-
-    <ul class="navbar-nav">
-    {% if shop.customer_accounts_enabled %}
-    {% if customer %}
-    <li class="nav-item">
-    <a class="nav-link" href="{{routes.account_url}}">Account</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="{{routes.account_logout_url}}">Logout</a>
-    </li>
-
-    {% else %}
-    <li class="nav-item">
-    <a class="nav-link" href="{{routes.account_login_url}}">Login</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="{{routes.account_register_url}}">Register</a>
-    </li>
-
-    {% endif %}
-    {% endif %}
-
-    {% endcomment %}</ul>
-
-
-
-  <form
-    class="search-nav"
-    action="/search"
-    method="GET"
-    role="search">
-
-    <div class="input-group flex-nowrap">
-      <input
-        class="form-control"
-        type="text"
-        name="q"
-        value="{{ search.terms | escape }}"
-        placeholder="Search"
-        aria-label="Search"
-        aria-describedby="addon-wrapping">
-
-      <button
-        type="submit"
-        class="input-group-text"
-        id="addon-wrapping">
-        <span class="material-symbols-outlined">
-          search
-        </span>
-      </button>
-
-    </div>
-
-
-
-  </form>
-  <div class="flex align-items-center nav-icons-desktop ps-4">
-    <a
-    class="nav-link"
-    href="#swym-wishlist"
-    class="swym-wishlist">
-    <span class="material-symbols-outlined nav-icons">
-
-      favorite
-
-    </span>
-  </a>
-  <a class="nav-link" href="{{routes.account_url}}">
-    <span class="material-symbols-outlined nav-icons">
-      person
-    </span>
-  </a>
-
-  <div>
-    <a class="nav-link" href="/cart">
-      <span class="material-symbols-outlined nav-icons">shopping_bag</span>
-      <span id="numberOfCartItem2" class="badge bg-secondary rounded-pill">0</span>
-    </a>
+    </ul>
   </div>
+
+  {% comment %}
+
+  <ul class="navbar-nav">
+  {% if shop.customer_accounts_enabled %}
+  {% if customer %}
+  <li class="nav-item">
+  <a class="nav-link" href="{{routes.account_url}}">Account</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" href="{{routes.account_logout_url}}">Logout</a>
+  </li>
+
+  {% else %}
+  <li class="nav-item">
+  <a class="nav-link" href="{{routes.account_login_url}}">Login</a>
+  </li>
+  <li class="nav-item">
+  <a class="nav-link" href="{{routes.account_register_url}}">Register</a>
+  </li>
+
+  {% endif %}
+  {% endif %}
+
+  {% endcomment %}
+  <div class="search-desktop">
+  {% render 'search-nav' %}
+  </div>
+
+  <div class="flex align-items-center nav-icons-desktop ps-4 gap-2">
+    <a
+      class="nav-link"
+      href="/pages/swym-wishlist"
+      class="swym-wishlist">
+      {% render 'heart-icon' %}
+    </a>
+    <a class="nav-link" href="{{routes.account_url}}">
+      {% render 'account-icon' %}
+    </a>
+
+    <div>
+      <a class="nav-link" href="/cart">
+        {% render 'cart-icon' %}
+        <span id="numberOfCartItem2" class="badge bg-secondary rounded-pill">0</span>
+      </a>
+    </div>
 
 
   </div>

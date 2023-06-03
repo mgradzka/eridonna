@@ -25,7 +25,10 @@
   font-size: 20px;
 } */
 
-.swym-btn-container .swym-add-to-wishlist:after {
+.swym-btn-container .swym-add-to-wishlist:after, 
+.swym-button.swym-add-to-wishlist-view-product.swym-heart:after 
+
+ {
   content: url('heart.svg') !important
 }
 
@@ -33,6 +36,12 @@
   display: none !important
 }
 
-.swym-btn-container .swym-add-to-wishlist.swym-added:after {
+.swym-btn-container .swym-add-to-wishlist.swym-added:after,
+.swym-button.swym-add-to-wishlist-view-product.swym-heart.swym-added:after 
+{
+  content: url('heart-added.svg') !important
+}
+
+button.swym-button.disabled {
   opacity: 1 !important;
 }

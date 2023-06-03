@@ -17,6 +17,7 @@
     {{ 'wishlist.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
+    <div id="wrap">
     {% section 'header' %}
     {% include 'swymSnippet' %}
 
@@ -48,6 +49,7 @@
 
       {{ content_for_layout }}
     </main>
+    </div>
     {% section 'footer-section' %}
 
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">

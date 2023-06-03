@@ -11,69 +11,75 @@
         class="row"
         novalidate>
 
-        <div class="col-12 col-md-8">
-          <div class="card shadow">
-            <div class="card-body">
-              <table class="table table-borderless">
-                <thead>
-                  <th colspan="2">Prod</th>
-                  <th>Price</th>
-                  <th>Qty</th>
-                  <th>total</th>
-                </thead>
-                <tbody>
-                  {% for item in cart.items %}
-                    <tr>
-                      <td>
-                        <a href="{{ item.url | within: collections.all }}">
+        <div class="col-12 col-md-9">
+          <div class="card shadow p-3 cart-table">
+            <table class="table table-borderless ">
+              <thead>
+                <th colspan="2">Product</th>
+                <th>Price</th>
+                <th class="table-quantity">Quantity</th>
+                <th>Total Price</th>
+                <th></th>
+              </thead>
+              <tbody>
+                {% for item in cart.items %}
+                  <tr>
+                    <td>
+                      <a href="{{ item.url | within: collections.all }}">
+                        <div class="background-effect">
                           <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
-                        </a>
-                      </td>
-                      <td>
-                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                        </div>
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      {% if item.variant.size > 1 %}
                         <p class="small">{{ item.variant.title }}</p>
-                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-                      </td>
-                      <td>{{ item.price | money }}</td>
-                      <td>
-                        <input
-                          type="number"
-                          name="updates[]"
-                          id="updates_{{ item.key }}"
-                          value="{{ item.quantity }}"
-                          min="0">
-                      </td>
-                      <td>
-                        {% if item.original_line_price != item.line_price %}
-                          {{ item.original_line_price | money }}{% endif %}
-                        {{ item.line_price | money }}
-                        {% for discount in item.discounts %}
-                          {{ discount.title }}{% endfor %}
-                      </td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-            </div>
+                      {% endif %}
+                    </td>
+                    <td>{{ item.price | money }}</td>
+                    <td class="table-quantity">
+                      <input
+                        class="table-quantity"
+                        type="number"
+                        name="updates[]"
+                        id="updates_{{ item.key }}"
+                        value="{{ item.quantity }}"
+                        min="0">
+                    </td>
+                    <td>
+                      {% if item.original_line_price != item.line_price %}
+                        {{ item.original_line_price | money }}{% endif %}
+                      {{ item.line_price | money }}
+                      {% for discount in item.discounts %}
+                        {{ discount.title }}{% endfor %}
+                    </td>
+                    <td>
+                      <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">&#10005;</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+
           </div>
         </div>
-        <div class="col-12 col-md-4">
-          <div class="card shadow">
-            <div class="card-body">
-              <p class="h3">The total amount is</p>
-              <p>{{ cart.total_price | money }}</p>
-              <div class="d-grid gap-2">
+        <div class="col-12 col-md-3">
+          <div class="card shadow p-3">
+            <p class="h3">The total amount is</p>
+            <p>{{ cart.total_price | money }}</p>
+            <div class="d-grid gap-2">
 
-                <button
-                  type="submit"
-                  class="button btn-primary"
-                  name="update">Update</button>
-                <button
-                  type="submit"
-                  class="button btn-primary"
-                  name="checkout">Checkout</button>
-              </div>
+              <button
+                type="submit"
+                class="button btn-primary"
+                name="update">Update</button>
+              <button
+                type="submit"
+                class="button btn-main"
+                name="checkout">Checkout</button>
             </div>
+
           </div>
         </div>
       </form>
@@ -86,4 +92,13 @@
       <p>Cart is empty</p>
     </div>
   </div>
+{% endif %}
+
+{% if item.variant.size > 1 %}
+
+  <style>
+    .variant {
+      display: none;
+    }
+  </style>
 {% endif %}

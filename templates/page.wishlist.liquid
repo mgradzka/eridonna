@@ -1,0 +1,29 @@
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+  {% include 'breadcrumbs' %}
+  </div>
+</div>
+<section class="container">
+  <h1>Wishlist</h1>
+  <br>
+  <div class="grid">
+    <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+
+      <!-- Section Heading →
+      <div class="section-header text-center">
+      <h1>My Wishlist</h1>
+      </div>
+
+      Render Wishlisted Products -->
+      <div class="rte">
+        {{ page.content }}
+        <div id="wishlist-items-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swym Wishlist render JS + CSS -->
+  <script src="{{ 'swym-custom-wishlist.js' | asset_url }}" async="async"></script>
+  <!-- Swym Custom Page CSS  -->
+  {% include 'swym-custom-wishlist-page-css' %}
+</section>

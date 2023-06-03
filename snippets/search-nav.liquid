@@ -1,0 +1,30 @@
+<form
+    class="search-nav"
+    action="/search"
+    method="GET"
+    role="search">
+
+    <div class="input-group flex-nowrap">
+      <input
+        class="form-control"
+        type="text"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="Search..."
+        aria-label="Search"
+        aria-describedby="addon-wrapping">
+
+      <button
+        type="submit"
+        class="input-group-text"
+        id="addon-wrapping">
+        <span class="material-symbols-outlined">
+          search
+        </span>
+      </button>
+
+    </div>
+
+
+
+  </form>

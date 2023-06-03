@@ -14,15 +14,18 @@
 
         <div class="slider">
           <img
-            class="grid-item background-effect"
+            class="grid-item background-effect gallery-image"
             src="{{ product_image | img_url: 'large'}}"
-            alt="{{ product_image.alt }}">
+            alt="{{ product_image.alt }}"
+            class="small-image"
+            data-toggle="modal"
+            data-target="#myModal">
 
           {% for image in product.images %}
             {% if image.src != product_image %}
 
               <img
-                class="grid-item background-effect"
+                class="grid-item background-effect gallery-image"
                 src="{{ image.src | img_url: 'large' }}"
                 alt="{{ image.alt }}"
                 data-id="{{ image.alt }}">
@@ -31,11 +34,20 @@
           {% endfor %}
 
         </div>
+        <div id="imageModal" class="modal">
+          <span class="close">&times;</span>
+          <img
+            src=""
+            alt="Modal Image"
+            id="modalImage"
+            class="modal-content">
+        </div>
         <button class="prev-button">&#60;</button>
         <button class="next-button">&#62;</button>
 
       </div>
     </div>
+
 
 
     <section class="col-md-6 col-12 flex flex-column gap-3 content-wrapper">
@@ -47,19 +59,26 @@
       <!-- Swym button on product pages -->
       <div class="flex justify-content-between">
         {% comment %}
-          
+
         <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
         {% endcomment %}
+        <!-- Start of Judge.me code -->
+          <div
+          style='{{ jm_style }}'
+          class='jdgm-widget jdgm-preview-badge'
+          data-id='{{ product.id }}'
+          data-auto-install='false'> {{ product.metafields.judgeme.badge }}
+        </div>
+        <!-- End of Judge.me code -->
         <p>{{ current_product.price | money_with_currency }}</p>
       </div>
-
       {% form 'product', product, class: "product-form", id: "AddToCartForm" %}
         <div class="mb-3">
 
           {% if product.available %}
-            <div class="flex align-items-baseline gap-2">
+            <div class="flex align-items-center gap-2 mb-4">
               <div class="dot green-dot"></div>
-              <p>In Stock</p>
+              <p class="mb-0">In Stock</p>
               {% render 'shipping24h' %}
             </div>
 
@@ -69,6 +88,12 @@
               <p>Not In-Stock</p>
             </div>
           {% endif %}
+
+
+
+          {% render 'brand-images' %}
+
+
 
           <div class="category-sku">
             <p>
@@ -165,17 +190,13 @@
 
 </div>
 {% comment %}
-  
+
 {% if shop.customer_accounts_enabled %}
-  {% if customer %}
-    <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
-  {% endif %}
+{% if customer %}
+<div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
 {% endif %}
-{% endcomment %}
-
-
-
-{% if product.has_only_default_variant %}
+{% endif %}
+{% endcomment %}{% if product.has_only_default_variant %}
 
   <style>
     #productSelect {

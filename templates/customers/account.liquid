@@ -5,11 +5,16 @@
   </div>
 </div>
 
-<div class="container my-5">
-  <h1 class="mb-3">Account</h1>
+<section class="container my-5">
   <div class="row">
     <div class="col-12 col-md-4">
-      <h6>Account details</h6>
+      <h4 class="mb-3">My Account</h4>
+     <a href="">Your orders</a>
+     <a href="{{routes.account_addresses_url}}">Addresses</a>
+      <a href="">Wishlish</a>
+
+      {% comment %}
+        
       {% if customer.default_address %}
         <p>{{ customer.default_address | format_address }}</p>
         <a href="{{routes.account_addresses_url}}" class="button btn-light">View addresses
@@ -17,7 +22,9 @@
         </a>
         
       {% endif %}
-      <a class="nav-link" href="{{routes.account_logout_url}}">Logout</a>
+      {% endcomment %}
+      <h4>Account settings</h4>
+      
       <a
       href="#recover"
       id="forgotPassword"
@@ -39,8 +46,13 @@
           value="Reset Password"
           class="button btn-secondary">
       {% endform %}
+      <a class="nav-link" href="{{routes.account_logout_url}}">Logout</a>
     </div>
+
     <div class="col-12 col-md-8">
+      <h1>Welcome back to your Account!</h1>
+      <h4 class="mb-5">{{ customer.first_name }} </h4>
+      <h5>Your Orders</h5>
       <div class="customer_orders">
         {% if customer.orders.size > 0 %}
           <table class="table tale-bordered">
@@ -82,7 +94,7 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {% comment %}
   
@@ -115,3 +127,7 @@
   {% endpaginate %}
 </div>
 {% endcomment %}
+
+
+
+
