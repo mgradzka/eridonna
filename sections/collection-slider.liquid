@@ -5,33 +5,75 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
 {%- capture flickity_options -%}
   {
   "prevNextButtons": true,
-        "contain": true,
-        "cellAlign": "left",
-        "groupCells": true,
-        "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
-        "wrapAround": true
-      }{%- endcapture -%}
+          "contain": true,
+          "cellAlign": "left",
+          "groupCells": true,
+          "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
+          "wrapAround": true
+        }{%- endcapture -%}
 
-<div class="featured-collection-slider p-4 page-width">
+<div class="featured-collection-slider page-width">
   {% if section.settings.title != blank %}
-    <div class="section-header text-center">
-      <h2>{{ section.settings.title | escape }}</h2>
+    <div class="section-header">
+      <h2 class="display-6">{{ section.settings.title | escape }}</h2>
     </div>
   {% endif %}
 
   {% comment %}
-    loop through collections (with its names and images)
+  loop through collections (with its names and images)
   {% endcomment %}
   {%- assign collection = collections[section.settings.collection] -%}
   {%- assign product_limit = section.settings.product_count -%}
 
-  <div class="products-carousel js-flickity" data-flickity='{{ flickity_options }}'>
+  <div class="products-carousel js-flickity collection-page" data-flickity='{{ flickity_options }}'>
     {% for product in collection.products limit: product_limit %}
-      <article class="carousel-cell card rounded-0 m-2 p-2">
+      <article class="carousel-cell m-2 p-2">
         <a href="{{ product.url | within: collection }}">
-          <img class="img-explore" src="{{ product.featured_image | img_url: 'master'}}">
-          <h4>{{ product.title }}</h4>
-          <p>{{ product.price | money }}</p>
+          <div class="background-effect">
+            <img
+              class="main collection-page-img"
+              src="{{ product.featured_image.src | img_url: 'master' }}"
+              alt="{{ product.featured_image.alt }}">
+            {% if product.images.size > 1 %}
+              <img
+                class="secondary collection-page-img"
+                src="{{ product.images[1] | img_url: 'master' }}"
+                alt="{{ product.images[1].alt | escape }}">
+            {% endif %}
+            <button
+            data-with-epi="true"
+            class="swym-button swym-add-to-wishlist-view-product product_{{product.id}}"
+            data-swaction="addToWishlist"
+            data-product-id="{{product.id | json}}"
+            data-variant-id="{{product.variants[0].id}}"
+            data-product-url="{{ shop.url }}{{ product.url }}"></button>
+          </div>
+
+          <div class="product-content p-2">
+                  <h3>{{ product.title }}</h3>
+
+
+
+                  <p class="collection-page__brand">
+                    <a href="https://eridonna.myshopify.com/collections/{{ product.metafields.custom.brand }}">
+                      {{ product.vendor }}</a>
+                    |  <a href="https://eridonna.myshopify.com/collections/{{ product.type }}">{{ product.type }}</a> </p>
+                  <div class="flex justify-content-between collection-page__money">
+                    {% if product.available %}
+                      <div class="flex align-items-baseline gap-2">
+                        <div class="dot green-dot"></div>
+                        <p>In Stock</p>
+                      </div>
+
+                    {% else %}
+                      <div class="flex align-items-baseline gap-2">
+                        <div class="dot red-dot"></div>
+                        <p>Available, longer delivery</p>
+                      </div>
+                    {% endif %}
+                    <p>{{ product.price | money_without_trailing_zeros }}</p>
+                  </div>
+                </div>
         </a>
       </article>
     {% endfor %}

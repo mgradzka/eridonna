@@ -1,0 +1,46 @@
+<div class="customer_orders display-block" id="accountcontent-1">
+    <h5>Your Orders</h5>
+  {% if customer.orders.size > 0 %}
+
+    {% if customer.orders.size != 0 %}
+      <div>
+        {% for order in customer.orders %}
+          <article class="card p-3 my-2 flex flex-row justify-content-between">
+            <div>
+              <p>
+                <strong>Order number:</strong>
+                <a href="{{ order.customer_url }}" class="text-decoration-underline">
+                  {{ order.name }}</a>
+              </p>
+              <p>
+                <strong>Price:</strong>
+                {{ order.total_price | money }}
+              </p>
+              <p>
+                <strong>Date of the order:</strong>
+                {{ order.created_at | time_tag: format: 'date' }}</p>
+        
+            </div>
+            <div class="order-images">
+              {% for line_item in order.line_items %}
+                {% if line_item.image != blank %}
+
+                  <img
+                    src="{{ line_item.image | img_url: 'small'}}"
+                    class="background-effect account-img"
+                    alt="">
+                {% endif %}
+              {% endfor %}
+            </div>
+          </article>
+
+
+        {% endfor %}
+      {% else %}
+        <p>You haven't placed any orders yet.</p>
+      </div>
+    {% endif %}
+
+
+  {% endif %}
+</div>

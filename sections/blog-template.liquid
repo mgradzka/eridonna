@@ -1,5 +1,7 @@
+<div class="breadcrumbs-container">
+{% include 'breadcrumbs' %}
+</div>
 <div class="position-relative py-4 px-1  brand-template__background">
-  {% include 'breadcrumbs' %}
   <div class="col-md-5 mx-auto my-5 text-center ">
     <h1>
       {{ section.settings.title }}</h1>
@@ -13,7 +15,7 @@
 
 <div class="container my-5 p-2">
 
-  {% paginate blog.articles by 6 %}
+  {% paginate blog.articles by 4 %}
 
     {% for article in blog.articles %}
 

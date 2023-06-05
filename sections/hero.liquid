@@ -15,37 +15,13 @@
                                               "cellAlign": "left",
                                               "groupCells": true,
                                               "arrowShape": {"x0": 20, "x1": 60, "y1": 40, "x2": 60, "y2": 35, "x3": 25},
-                                              "wrapAround": true
+                                              "wrapAround": true,
+                                              "autoPlay": true
                                             }{%- endcapture -%}
 
 
   <div class="featured-collection-slider1">
 
-
-
-    {% comment %}
-
-    {%- assign product_limit = section.settings.product_count -%}
-    <img class="carousel-cell card rounded-0 m-2 p-2" src="{{ collection.image }}" alt="">
-
-
-
-    <div class="row">
-    <div class="col-lg-6 col-md-8 mx-auto">
-    <h2>
-    {{ collection.title }}</h2>
-    <p>
-
-    {{ section.settings.description }}
-    </p>
-    <a href="{{ section.settings.button_link}}" class="btn btn-secondary">{{ section.settings.button_label }}</a>
-    </div>
-    </div>
-
-    <div class="slide carousel-cell" {{ block.shopify_attributes }}>
-    {{ block.settings.image | image_url: width: 2048 | image_tag }}
-    </div>
-    {% endcomment %}
     <div
       class="slideshow-container products-carousel js-flickity"
       data-width="less"
@@ -62,7 +38,7 @@
             src="{{block.settings.image | img_url: 'master'}}"
             alt="{{ block.settings.image.alt }}">
           <div class="slide-content-container backdrop-blur-hero">
-            <h2>{{ block.settings.title }}</h2>
+            <h2 class="display-6">{{ block.settings.title }}</h2>
             <h5>{{ block.settings.sub_title }}</h5>
             <p>{{ block.settings.body }}</p>
             <a href="{{ block.settings.button_url }}" class="button btn-main">{{ block.settings.button_label }}</a>

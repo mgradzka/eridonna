@@ -1,5 +1,7 @@
+<div class="breadcrumbs-container">
+{% include 'breadcrumbs' %}
+</div>
 <div class="position-relative  py-4 px-1 brand-template__background">
-  {% include 'breadcrumbs' %}
   <div class="col-md-5 mx-auto my-5 text-center ">
     <h1>
       {{ section.settings.title }}</h1>
@@ -16,9 +18,9 @@
 
   {% for block in mainSection %}
 
-    <div class=" flex flex-column flex-lg-row gap-4">
-      <div>
-        <h2>{{ block.settings.title }}</h2>
+    <div class=" flex flex-column flex-lg-row gap-5">
+      <div class="p-2">
+        <h2 class="mb-4">{{ block.settings.title }}</h2>
         <p>{{ block.settings.description }}
         </p>
       </div>
@@ -34,14 +36,14 @@
   {% assign aboutSections = section.blocks | where: 'type', 'text' %}
   {% for block in aboutSections %}
 
-    <article class="mb-4">
+    <article class="my-5">
       <h3>{{ block.settings.title }}</h3>
       <p>{{ block.settings.introduction }}
       </p>
     </article>
   {% endfor %}
 
-  <h3>See More on our Social Media</h3>
+  <h3 class="mt-5">See More on our Social Media</h3>
   <div id="insta-feed"></div>
 </section>
 

@@ -62,101 +62,63 @@
 
   <div class="container-fluid flex py-4 justify-content-center">
     <section>
-      {% for block in section.blocks %}
-        {% assign item = block.settings %}
-        <div class="col">
-          <h5>{{ item.title }}</h5>
-          {% assign footer_linklist = item.menu %}
-          <ul class="list-unstyled text-small">
-            {% for link in linklists[footer_linklist].links %}
-              <li>
-                <a href="{{link.url}}">{{ link.title | escape }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-
-
-      {% endfor %}
-    </section>
-    <section>
-      <h5>Account</h5>
+      <h5>Contact Information</h5>
       <ul class="list-unstyled text-small">
         <li>
-          <a href="">My Account</a>
-        </li>
-        <li>
-          <a href="">Forgotten Password</a>
+          <a href="/pages/contact">Contact Form</a>
         </li>
       </ul>
-      <h5>Social media</h5>
+      <h5>Quick Information</h5>
+      <ul class="list-unstyled text-small">
+        <p>
+          Phone:
+          <a href="tel:+421 905 211 344 ">
+            +421 905 211 344
+          </a>
 
-      <a href="">{% render 'instagram' %}</a>
+          <br>
+          Address: Hlavna 992, Galanta, Slovakia
+        </p>
 
-      <a href="">{% render 'facebook' %}</a>
+      </ul>
+     
+    </section>
+    <section>
+      <div>
+        <h5>General Information</h5>
+        <ul class="list-unstyled text-small">
+          <li>
+            <a href="/pages/privacy-policy">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="/pages/good-reclaim">Goods Reclaim</a>
+          </li>
+          <li>
+            <a href="">Complaint</a>
+          </li>
+        </ul>
+        <h5>Account</h5>
+        <ul class="list-unstyled text-small">
+          <li>
+            <a href="{{routes.account_url}}">My Account</a>
+          </li>
+        </ul>
+        
 
     </section>
     <section>
       <h5>Newsletter</h5>
       <p>Subscribe to our newsletter to get exciting news from the world of Eridonna</p>
+      <div id="omnisend-embedded-v2-647b5220e54adad5ac575876"></div>
+      <h5 class="mt-2">Social media</h5>
+
+      <a href="https://www.instagram.com/eridonna.sk/">{% render 'instagram' %}</a>
+
+      <a href="https://www.facebook.com/eridonna.sperky.hodinky">{% render 'facebook' %}</a>
+
     </section>
   </div>
 </footer>
 
 {{ 'bootstrap.bundle.min.js' | asset_url | script_tag }}
 {{ 'application.js' | asset_url | script_tag }}
-
-{% schema %}
-  {
-    "name": "Footer",
-    "settings": [
-      {
-        "type": "range",
-        "id": "col_num",
-        "default": 3,
-        "min": 2,
-        "max": 4,
-        "label": "Number of Columns"
-      }
-    ],
-    "max_blocks": 4,
-    "blocks": [
-      {
-        "type": "link_list",
-        "name": "Navigation",
-        "settings": [
-          {
-            "type": "text",
-            "id": "title",
-            "label": "title",
-            "default": "Quick Links"
-          }, {
-            "type": "link_list",
-            "id": "menu",
-            "label": "Menu"
-          }
-
-        ]
-      }, {
-        "type": "text",
-        "name": "Store details",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "logo",
-            "label": "Store Logo"
-          }, {
-            "type": "text",
-            "id": "title",
-            "label": "Heading",
-            "default": "Store information"
-          }, {
-            "type": "richtext",
-            "id": "description",
-            "label": "Text"
-          }
-        ]
-      }
-    ]
-  }
-{% endschema %}

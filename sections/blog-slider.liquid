@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
 <div class="featured-collection-slider categories-slider mt-5 page-width ">
   {% if section.settings.title != blank %}
     <div class="section-header">
-      <h2>{{ section.settings.title | escape }}</h2>
+      <h2 class="display-6"> {{ section.settings.title | escape }}</h2>
     </div>
   {% endif %}
 
@@ -33,7 +33,7 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
         <div>
           <a href="{{ article.url }}">
             <img class="categories-slider-img" src=" {{ article.image | img_url: 'master' }} ">
-            <div class="backdrop-blur">
+            <div class="backdrop-blur blog-blur">
               <h4 class="blog-slider-title">{{ article.title }}</h4>
             </div>
           </a>

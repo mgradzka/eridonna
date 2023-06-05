@@ -1,0 +1,286 @@
+<section class="shop-the-look ">
+    <h2 class="display-6">Shop The Look</h2>
+    
+    <div class="flex flex-column flex-md-row gap-4 justify-content-left">
+    <div class="shop-container">
+      <img
+        src="{{ section.settings.image1 | img_url: 'master' }}"
+        class="mb-2 image-look"
+        id="image1 "
+        alt="">
+      <div class="darker"></div>
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="button-shop"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        <p>See Items</p>
+
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+
+          <div class="modal-body  p-0">
+            <section class="flex">
+              <img
+                src="{{ section.settings.image1 | img_url: 'master' }}"
+                class="modal-img-shop"
+                id="image1 "
+                alt="">
+
+              <div class="w-100 shop-text p-4">
+                <button
+                  type="button"
+                  class="btn-close modal-button-close text-right flex"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+                <div>
+                  <h2 class="mb-4">Items shown on the Image</h2>
+
+                  <div class="article-container ">
+
+                    {% assign products1 = section.blocks | where: 'type', 'product-image1' %}
+                    {% for block in products1 %}
+                      <article>
+                        <a href="{{ block.settings.product.url }}">
+
+                          <!-- Swym Wishlist Plus EPI Button-->
+
+                          <!-- Swym Wishlist Plus EPI Button-->
+                            <div class="background-effect"> <img
+                              class="collection-page-img"
+                              src="{{ block.settings.product.featured_image | img_url: 'master' }}"
+                              alt="{{ block.settings.product.title }}">
+                            <button
+                              data-with-epi="true"
+                              class="swym-button swym-add-to-wishlist-view-product product_{{ block.settings.product.id}}"
+                              data-swaction="addToWishlist"
+                              data-product-id="{{ block.settings.product.id | json}}"
+                              data-variant-id="{{ block.settings.product.variants[0].id}}"
+                              data-product-url="{{ shop.url }}{{ block.settings.product.url }}"></button>
+
+                          </div>
+
+
+
+                          <div class="product-content p-2">
+                            <h3>{{ block.settings.product.title }}</h3>
+
+
+
+                            <p class="collection-page__brand">
+                              {{ block.settings.product.metafields.custom.brand }} | {{ product.type }}</p>
+                            <div class="flex justify-content-between collection-page__money">
+                              {% if block.settings.product.available %}
+                                <div class="flex align-items-baseline gap-2">
+                                  <div class="dot green-dot"></div>
+                                  <p>In Stock</p>
+                                </div>
+
+                              {% else %}
+                                <div class="flex align-items-baseline gap-2">
+                                  <div class="dot red-dot"></div>
+                                  <p>Available, longer delivery</p>
+                                </div>
+                              {% endif %}
+                              <p>{{ block.settings.product.price | money_without_trailing_zeros }}</p>
+                            </div>
+                          </div>
+                        </a>
+                      </article>
+                    {% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="shop-container">
+      <img
+        src="{{  section.settings.image2 | img_url: 'master' }}"
+        class="mb-2 image-look"
+        id="image1 "
+        alt="">
+      <div class="darker"></div>
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="button-shop"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal2">
+        <p>See Items</p>
+
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="exampleModal2"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-xl ">
+        <div class="modal-content">
+
+          <div class="modal-body  p-0">
+            <section class="flex">
+              <img
+                src="{{ section.settings.image2 | img_url: 'master' }}"
+                class="modal-img-shop"
+                id="image2 "
+                alt="">
+
+              <div class="w-100 shop-text p-4">
+                <button
+                  type="button"
+                  class="btn-close modal-button-close text-right flex"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+                <div>
+                  <h2 class="mb-4">Items shown on the Image</h2>
+
+                  <div class="article-container ">
+
+                    {% assign products2 = section.blocks | where: 'type', 'product-image2' %}
+                    {% for block in products2 %}
+                      <article>
+                        <a href="{{ block.settings.product.url }}">
+
+                          <!-- Swym Wishlist Plus EPI Button-->
+
+                          <!-- Swym Wishlist Plus EPI Button-->
+                            <div class="background-effect"> <img
+                              class="collection-page-img"
+                              src="{{ block.settings.product.featured_image | img_url: 'master' }}"
+                              alt="{{ block.settings.product.title }}">
+                            <button
+                              data-with-epi="true"
+                              class="swym-button swym-add-to-wishlist-view-product product_{{ block.settings.product.id}}"
+                              data-swaction="addToWishlist"
+                              data-product-id="{{ block.settings.product.id | json}}"
+                              data-variant-id="{{ block.settings.product.variants[0].id}}"
+                              data-product-url="{{ shop.url }}{{ block.settings.product.url }}"></button>
+
+                          </div>
+
+
+
+                          <div class="product-content p-2">
+                            <h3>{{ block.settings.product.title }}</h3>
+
+
+
+                            <p class="collection-page__brand">
+                              {{ block.settings.product.metafields.custom.brand }} | {{ product.type }}</p>
+                            <div class="flex justify-content-between collection-page__money">
+                              {% if block.settings.product.available %}
+                                <div class="flex align-items-baseline gap-2">
+                                  <div class="dot green-dot"></div>
+                                  <p>In Stock</p>
+                                </div>
+
+                              {% else %}
+                                <div class="flex align-items-baseline gap-2">
+                                  <div class="dot red-dot"></div>
+                                  <p>Not In-Stock</p>
+                                </div>
+                              {% endif %}
+                              <p>{{ block.settings.product.price | money_without_trailing_zeros }}</p>
+                            </div>
+                          </div>
+                        </a>
+                      </article>
+                    {% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Shop The Look",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image1",
+        "label": "image 1"
+      }, {
+        "type": "image_picker",
+        "id": "image2",
+        "label": "image 2"
+      }
+
+
+    ],
+    "blocks": [
+      {
+        "name": "product for image1",
+        "type": "product-image1",
+        "settings": [
+
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product-Handle"
+          }
+
+        ]
+      }, {
+        "name": "product for image2",
+        "type": "product-image2",
+        "settings": [
+
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product-Handle"
+          }
+
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop The Look",
+
+        "blocks": [
+          {
+            "type": "product-image1"
+          }, {
+            "type": "product-image2"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

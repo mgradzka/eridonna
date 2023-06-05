@@ -44,14 +44,22 @@
         <div class="flex justify-content-between">
           <h6>Color:
           </h6>
-          <p>{{ product.metafields.custom.color }}</p>
+         <p>
+          {% for option in product.metafields.custom.color.value %}
+           {{ option }} 
+          {% endfor %}
+          </p>
         </div>
 
         {% if product.metafields.custom.stone_type != blank %}
           <div class="flex justify-content-between">
             <h6>Surface Treatment:
             </h6>
-            <p>{{ product.metafields.custom.surface_treatment }}</p>
+            <p>
+            {% for surface in product.metafields.custom.surface_treatment.value %}
+             {{ surface }}
+             {% endfor %}
+             </p>
           </div>
         {% endif %}
 

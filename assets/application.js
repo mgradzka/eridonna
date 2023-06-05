@@ -97,6 +97,19 @@ if (document.getElementById("forgotPassword") != null) {
 //   });
 // }
 
+if (document.getElementById("forgotPasswordAccount") != null) {
+  document.getElementById("forgotPasswordAccount").addEventListener("click", (e) => {
+    const link = document.querySelector("#forgot_password_account");
+    if (link.classList.contains("d-none")) {
+      link.classList.remove("d-none");
+      link.classList.add("d-block");
+    } else {
+      link.classList.add("d-none");
+      link.classList.remove("d-block");
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", (data) => {
   updateCart(data);
 });
@@ -225,6 +238,8 @@ function setActiveButton(button) {
   }
 }
 
+setActiveButton(allButton)
+
 const productPage = document.querySelector("#productPage");
 
 if (productPage != null) {
@@ -295,37 +310,6 @@ if (productPage != null) {
 
 
 
-  var modal = document.getElementById("imageModal");
-
-// Get the image and modal content elements
-var galleryImages = document.getElementsByClassName("gallery-image");
-var modalImage = document.getElementById("modalImage");
-
-// Loop through the gallery images and attach the click event listener
-Array.from(galleryImages).forEach(function(image) {
-  image.onclick = function() {
-    modal.style.display = "block";
-    modalImage.src = image.src;
-    document.body.style.overflow = "hidden"; // Disable scrolling on the body
-  };
-});
-
-// When the user clicks on the close button, close the modal
-document.getElementsByClassName("close")[0].onclick = function() {
-  modal.style.display = "none";
-  document.body.style.overflow = "auto"; // Enable scrolling on the body
-};
-
-// When the user clicks outside the modal, close it
-window.onclick = function(event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto"; // Enable scrolling on the body
-  }
-};
-
-
-
 }
 
 const collectionPage = document.querySelector(".collection-page");
@@ -337,3 +321,53 @@ if (collectionPage) {
 }
 
 
+// nav box shadow
+window.addEventListener('scroll', function() {
+  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollPosition > 100) { // Change 100 to the appropriate scroll position where you want to change the navbar color
+    navbar.classList.add('scrolled-nav');
+  } else {
+    navbar.classList.remove('scrolled-nav');
+  }
+});
+
+
+// account page - dynamic content
+const accountButtons = document.querySelectorAll("#btn-account");
+const accountContent = document.querySelectorAll("[id^='accountcontent']");
+const spantext =  document.querySelectorAll(".span-account")
+// const button3 = document.getElementById("button3");
+
+for (let i = 0; i < accountButtons.length; i++) {
+  accountButtons[i].addEventListener("click", function() {
+    const target = accountButtons[i].getAttribute("data-target");
+    showContent(target);
+    hideOtherContents(target);
+    ActiveButton(spantext[i]);
+  });
+}
+
+// Helper functions to show/hide content
+function showContent(target) {
+  const accountContent = document.getElementById(target);
+  accountContent.classList.add("display-block");
+  accountContent.classList.remove("display-none");
+}
+
+function hideOtherContents(target) {
+  for (let i = 0; i < accountContent.length; i++) {
+    const content = accountContent[i];
+    if (content.id !== target) {
+      content.classList.add("display-none");
+      content.classList.remove("display-block");
+    }
+  }
+}
+
+function ActiveButton(button) {
+  for (let i = 0; i < spantext.length; i++) {
+    spantext[i].classList.remove("btn-active");
+  }
+  button.classList.add("btn-active");
+}

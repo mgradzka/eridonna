@@ -1,20 +1,13 @@
-{% comment %}
-  
-{% if section.settings.container == 'container' %}
-  {% assign container_class = 'container' %}
-{% else %}
-  {% assign container_class = 'container-fluid' %}
-{% endif %}
-{% endcomment %}
-
-<div class="container my-5">
-  <h1>{{ page.title }}</h1>
-  {% if section.settings.show_publish_date %}
-    <small>{{ page.published_at | date: '%B %d, %Y' }}</small>
-  {% endif %}
-  <div class="my-5">{{ page.content }}</div>
-
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+    {% include 'breadcrumbs' %}
+  </div>
 </div>
+<section class="container my-5">
+  <h1>{{ page.title }}</h1>
+  <section class="my-5">{{ page.content }}</section>
+
+</section>
 
 
 {% schema %}

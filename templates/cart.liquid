@@ -2,7 +2,7 @@
 
   <div class="container">
     <div class="row">
-      <p class="h2 my-5 text-center">Shopping Cart</p>
+    <h2>Shopping Cart</h2>
     </div>
     <div class="my-5">
       <form
@@ -15,30 +15,30 @@
           <div class="card shadow p-3 cart-table">
             <table class="table table-borderless ">
               <thead>
-                <th colspan="2">Product</th>
+                <th colspan="2" class="table-product">Product</th>
                 <th>Price</th>
                 <th class="table-quantity">Quantity</th>
-                <th>Total Price</th>
-                <th></th>
+                <th class="table-price">Total Price</th>
+                <th class="table-delete"> </th>
               </thead>
               <tbody>
                 {% for item in cart.items %}
                   <tr>
-                    <td>
+                    <td data-label="Product">
                       <a href="{{ item.url | within: collections.all }}">
                         <div class="background-effect">
                           <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}">
                         </div>
                       </a>
                     </td>
-                    <td>
+                    <td >
                       <a href="{{ item.url }}">{{ item.product.title }}</a>
                       {% if item.variant.size > 1 %}
                         <p class="small">{{ item.variant.title }}</p>
                       {% endif %}
                     </td>
-                    <td>{{ item.price | money }}</td>
-                    <td class="table-quantity">
+                    <td data-label="Price">{{ item.price | money }}</td>
+                    <td data-label="Quantity">
                       <input
                         class="table-quantity"
                         type="number"
@@ -47,14 +47,14 @@
                         value="{{ item.quantity }}"
                         min="0">
                     </td>
-                    <td>
+                    <td data-label="Total Price">
                       {% if item.original_line_price != item.line_price %}
                         {{ item.original_line_price | money }}{% endif %}
                       {{ item.line_price | money }}
                       {% for discount in item.discounts %}
                         {{ discount.title }}{% endfor %}
                     </td>
-                    <td>
+                    <td data-label=" ">
                       <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">&#10005;</a>
                     </td>
                   </tr>

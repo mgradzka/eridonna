@@ -18,7 +18,9 @@
   <p>
     {{ date }}</p>
 
-  <img src="{{ article.image | img_url: 'master'}}" alt="">
+  <img src="{{ article.image | img_url: 'master'}}" class="article-img" alt="">
 
   <div>{{ article.content }}</div>
 </section>
+
+{% section 'collection-slider' %}

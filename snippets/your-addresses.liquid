@@ -1,0 +1,163 @@
+<!-- /templates/customers/addresses.liquid -->
+
+
+<div class="display-none " id="accountcontent-2">
+
+  <h5>Your Addresses</h5>
+  <button
+    class="button btn-primary rounded-0"
+    data-bs-toggle="modal"
+    data-bs-target="#newAddressModal">Create new address</button>
+  <section class="row row-cols-md-4 row-cols-1 my-5 gx-2">
+    {% for address in customer.addresses %}
+      <div class="col">
+        <article class="card">
+          <div class="card-body">
+            {{ address | format_address }}
+          </div>
+          <div class="card-footer">
+            <form
+              action="/account/addresses/{{ address.id }}"
+              method="post"
+              data-confirm-message="Delete Address">
+              <input type="hidden" name="_method" value="delete">
+              <button class="button btn-danger">Delete</button> 
+              </form>
+          </div>
+        </article>
+      </div>
+    {% endfor %}
+  </section>
+</div>
+
+<div
+  class="modal fade"
+  id="newAddressModal"
+  tabindex="-1"
+  aria-labelledby="newAddressModalLabel"
+  aria-hidden="true">
+  {% form 'customer_address', customer.new_address %}
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newAddressModalLabel">Add new address</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-12 mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input
+              id="first_name"
+              type="text"
+              value="{{form.first_name}}"
+              name="address[first_name]"
+              size="30"
+              class="form-control" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input
+              id="last_name"
+              type="text"
+              value="{{form.last_name}}"
+              name="address[last_name]"
+              size="30"
+              class="form-control" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="company" class="form-label">Company</label>
+            <input
+              id="company"
+              type="text"
+              value="{{form.company}}"
+              name="address[company]"
+              size="30"
+              class="form-control" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="address1" class="form-label">Address</label>
+            <input
+              id="address1"
+              type="text"
+              value="{{form.address1}}"
+              name="address[address1]"
+              size="30"
+              class="form-control" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="address2" class="form-label">Apartment, suite, etc</label>
+            <input
+              id="address2"
+              type="text"
+              value="{{form.address2}}"
+              name="address[address2]"
+              size="30"
+              class="form-control" />
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-12 col-md-4 mb-3">
+              <label for="city" class="form-label">City</label>
+              <input
+                id="city"
+                type="text"
+                value="{{form.city}}"
+                name="address[city]"
+                size="30"
+                class="form-control" />
+            </div>
+            <div class="col-12 col-md-4  mb-3">
+              <label for="country" class="form-label">Country</label>
+              <select
+                id="country"
+                name="address[country]"
+                class="form-control">{{ all_country_option_tags }}</select>
+            </div>
+            <div class="col-12  col-md-4 mb-3">
+              <label for="province" class="form-label">Province</label>
+              <select
+                id="province"
+                type="text"
+                value="{{form.province}}"
+                name="address[province]"
+                class="form-control"
+                disabled="disabled"></select>
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <label for="zip" class="form-label">Postal/ZIP Code</label>
+            <input
+              id="zip"
+              type="text"
+              value="{{form.zip}}"
+              name="address[zip]"
+              size="30"
+              class="form-control" />
+          </div>
+          <div class="col-12 mb-3">
+            <label for="phone" class="form-label">Phone number</label>
+            <input
+              id="phone"
+              type="text"
+              value="{{form.phone}}"
+              name="address[phone]"
+              size="30"
+              class="form-control" />
+          </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="submit" class="button btn-primary">Create address</button>
+        </div>
+      </div>
+    </div>
+  {% endform %}
+
+</div>

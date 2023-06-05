@@ -1,45 +1,53 @@
+{% include 'breadcrumbs' %}
+
 <div class="collection-page__background py-4 px-1 ">
-  {% include 'breadcrumbs' %}
+
   <div class="collection-page__background_text p-4">
     <h1 class="text-center mb-2">{{ collection.title }}</h1>
     <p class="text-center">{{ collection.description }}</p>
   </div>
 </div>
 
+<section class="collection">
 
-
-<div class="container collection-page">
   {% if collection.handle == 'gift-ideas' %}
+
     {% section 'categories-slider' %}
   {% endif %}
-  {% paginate collection.products by 8 %}
+  <div class="container collection-page">
+    {% paginate collection.products by 8 %}
 
-    <div class="sticky-top justify-content-between flex mt-5 py-4 bg-white">
+      <div class="sticky-top justify-content-between flex mt-5 py-4 bg-white">
 
-      {% render 'filtering' %}
-      {% render 'sorting' %}
-    </div>
-    <div class="row justify-content-left my-3 mx-1  ">
+        {% render 'filtering' %}
+        {% render 'sorting' %}
+      </div>
+      <div class="row justify-content-left my-3 mx-1  ">
 
 
-      {% for product in collection.products %}
-        {% assign image = product.featured_media.preview_image %}
+        {% for product in collection.products %}
+
           <div class="col-6 col-sm-3 g-2 g-sm-3 ">
 
-          {% comment %}
-          the card here is the same as in featured collection - it should be moved to snippets!
-          {% endcomment %}
-          <article>
-            <a href="{{ product.url }}">
-              {% if image != blank %}
+            {% comment %}
+            the card here is the same as in featured collection - it should be moved to snippets!
+            {% endcomment %}
+            <article>
+              
+
                 <!-- Swym Wishlist Plus EPI Button-->
 
                 <!-- Swym Wishlist Plus EPI Button-->
-                  <div class="background-effect"> 
+               <div class="background-effect"> <img
+                    class="main collection-page-img"
+                    src="{{ product.featured_image.src | img_url: 'master' }}"
+                    alt="{{ product.featured_image.alt }}">
+                  {% if product.images.size > 1 %}
                     <img
-                    class="collection-page-img"
-                    src="{{ image | img_url: 'master' }}"
-                    alt="{{ product.title }}">
+                      class="secondary collection-page-img"
+                      src="{{ product.images[1] | img_url: 'master' }}"
+                      alt="{{ product.images[1].alt | escape }}">
+                  {% endif %}
                   <button
                     data-with-epi="true"
                     class="swym-button swym-add-to-wishlist-view-product product_{{product.id}}"
@@ -49,49 +57,53 @@
                     data-product-url="{{ shop.url }}{{ product.url }}"></button>
                 </div>
 
-              {% else %}
-                {{ 'product-1' | placeholder_svg_tag: 'card-img-top' }}
-              {% endif %}
 
-              <div class="product-content p-2">
-                <h3>{{ product.title }}</h3>
+
+                <div class="product-content p-2">
+                  <a href="{{ product.url }}">    <h3>{{ product.title }}</h3></a>
 
 
 
-                <p class="collection-page__brand">
-                  {{ product.metafields.custom.brand }} | {{ product.type }}</p>
-                <div class="flex justify-content-between collection-page__money">
-                  {% if product.available %}
-                    <div class="flex align-items-baseline gap-2">
-                      <div class="dot green-dot"></div>
-                      <p>In Stock</p>
-                    </div>
+                  <p class="collection-page__brand">
+                    <a href="https://eridonna.myshopify.com/collections/{{ product.metafields.custom.brand }}">
+                      {{ product.vendor }}</a>
+                    |  <a href="https://eridonna.myshopify.com/collections/{{ product.type }}">{{ product.type }}</a> </p>
+                  <div class="flex justify-content-between collection-page__money">
+                    {% if product.available %}
+                      <div class="flex align-items-baseline gap-2">
+                        <div class="dot green-dot"></div>
+                        <p>In Stock</p>
+                      </div>
 
-                  {% else %}
-                    <div class="flex align-items-baseline gap-2">
-                      <div class="dot red-dot"></div>
-                      <p>Not In-Stock</p>
-                    </div>
-                  {% endif %}
-                  <p>{{ product.price | money_without_trailing_zeros }}</p>
+                    {% else %}
+                      <div class="flex align-items-baseline gap-2">
+                        <div class="dot red-dot"></div>
+                        <p>Available, longer delivery</p>
+                      </div>
+                    {% endif %}
+                    <p>{{ product.price | money_without_trailing_zeros }}</p>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </article>
-        </div>
+            
+            </article>
+          </div>
 
-      {% else %}
-        <p>no matches</p>
-      {% endfor %}
-    </div>
+        {% else %}
+          <p>no matches</p>
+        {% endfor %}
+      </div>
 
-    {% render 'pagination', paginate: paginate %}
-  {% endpaginate %}
-</div>
+      {% render 'pagination', paginate: paginate %}
+    {% endpaginate %}
+  </div>
+</section>
 
 <style>
   .collection-page__background {
     background-image: url('{{ collection.featured_image | img_url: 'master' }}');
     background-size: cover;
+    background-position-y: center;
   }
 </style>
+
+<script></script>

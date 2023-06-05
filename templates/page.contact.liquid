@@ -1,14 +1,25 @@
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+    {% include 'breadcrumbs' %}
+  </div>
+</div>
+
+<section class="container contact">
+
 <h1>{{ page.title }}</h1>
 {% form 'contact' %}
-  {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+  <div class=" w-50">
   {{ form.errors | default_errors }}
-  <label for="ContactFormName">name</label>
-  <input type="text" id="ContactFormName" name="contact[name]">
-  <label for="ContactFormEmail">email</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]">
-  <label for="ContactFormPhone">phone</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]">
-  <label for="ContactFormMessage">message</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-  <input type="submit" value="send">
+  <label for="ContactFormName">Name</label>
+  <input class="form-control" type="text" id="ContactFormName" name="contact[name]">
+  <label for="ContactFormEmail">Email</label>
+  <input class="form-control"  type="email" id="ContactFormEmail" name="contact[email]">
+  <label for="ContactFormPhone">Phone</label>
+  <input class="form-control"  type="tel" id="ContactFormPhone" name="contact[phone]">
+  <label  for="ContactFormMessage">Message</label>
+  <textarea class="form-control"  rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
+  <input  class="mt-4 button btn-main" type="submit" value="Send Message">
+  </div>
+{% if form.posted_successfully? %} Thank you for your message! We will contact you soon.{% endif %}
 {% endform %}
+</section>

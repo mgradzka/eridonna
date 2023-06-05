@@ -31,7 +31,7 @@
     </div>
 
     <div class="row">
-      <h1 class="text-center">{{ search.results_count }} search results</h1>
+      <h1>{{ search.results_count }} search results</h1>
     </div>
 
     <div class="row row-cols-3 g-2 my-5">
@@ -43,12 +43,11 @@
               <div class="card shadow">
                 {% if item.featured_image %}
                   <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-                    {{ item.featured_image.src | img_url: 'master' | img_tag: item.featured_image.alt, 'card-img-top' }}
+                    {{ item.featured_image.src | img_url: 'master' | img_tag: item.featured_image.alt, 'search-img' }}
                   </a>
                 {% endif %}
                 <div class="card-body">
                   <h5>{{ item.title | link_to: item.url }}</h5>
-                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
                 </div>
               </div>
             </div>
@@ -57,12 +56,11 @@
               <div class="card shadow">
                 {% if item.image %}
                   <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-                    {{ item.image.src | img_url: 'master' | img_tag: item.image.alt, 'card-img-top' }}
+                    {{ item.image.src | img_url: 'master' | img_tag: item.image.alt, 'search-img' }}
                   </a>
                 {% endif %}
                 <div class="card-body">
                   <h5>{{ item.title | link_to: item.url }}</h5>
-                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
                 </div>
               </div>
             </div>

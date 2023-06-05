@@ -13,35 +13,29 @@
 
 
         <div class="slider">
-          <img
-            class="grid-item background-effect gallery-image"
-            src="{{ product_image | img_url: 'large'}}"
-            alt="{{ product_image.alt }}"
-            class="small-image"
-            data-toggle="modal"
-            data-target="#myModal">
-
+          <div class="zoom">
+            <img
+              class="grid-item background-effect"
+              src="{{ product_image | img_url: 'large'}}"
+              alt="{{ product_image.alt }}"
+              class="small-image"
+              data-toggle="modal"
+              data-target="#myModal">
+          </div>
           {% for image in product.images %}
             {% if image.src != product_image %}
-
-              <img
-                class="grid-item background-effect gallery-image"
-                src="{{ image.src | img_url: 'large' }}"
-                alt="{{ image.alt }}"
-                data-id="{{ image.alt }}">
-
+              <div class="zoom">
+                <img
+                  class="grid-item background-effect gallery-image"
+                  src="{{ image.src | img_url: 'large' }}"
+                  alt="{{ image.alt }}"
+                  data-id="{{ image.alt }}">
+              </div>
             {% endif %}
           {% endfor %}
 
         </div>
-        <div id="imageModal" class="modal">
-          <span class="close">&times;</span>
-          <img
-            src=""
-            alt="Modal Image"
-            id="modalImage"
-            class="modal-content">
-        </div>
+
         <button class="prev-button">&#60;</button>
         <button class="next-button">&#62;</button>
 
@@ -83,9 +77,10 @@
             </div>
 
           {% else %}
-            <div class="flex align-items-baseline gap-2">
+            <div class="flex align-items-center gap-2 mb-4">
               <div class="dot red-dot"></div>
-              <p>Not In-Stock</p>
+              <p class="mb-0">Available, longer delivery</p>
+              {% render 'shipping7-14' %}
             </div>
           {% endif %}
 
@@ -97,7 +92,8 @@
 
           <div class="category-sku">
             <p>
-              SKU: {{ product.metafields.custom.sku }}<br>
+              SKU: {{ product.first_available_variant.sku }}<br>
+
               Category: {{ product.type }}</p>
           </div>
 
@@ -114,25 +110,39 @@
           {% endfor %}
           {% endcomment %}
 
+          <div class="flex gap-4">
+            <select
+              name="id"
+              id="productSelect"
+              class="form-select">
+              {% for variant in product.variants %}
+                {% if variant.available %}
+                  <option value="{{ variant.id }}">
+                    {{ variant.title }}
+                  </option>
+                {% else %}
+                  <option value="{{ variant.id }}" disabled="disabled">
+                    {{ variant.title }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
 
-          <select
-            name="id"
-            id="productSelect"
-            class="form-select">
-            {% for variant in product.variants %}
-              {% if variant.available %}
-                <option value="{{ variant.id }}">
-                  {{ variant.title }}
-                </option>
-              {% else %}
-                <option value="{{ variant.id }}" disabled="disabled">
-                  {{ variant.title }}
-                </option>
+            {% for tag in product.tags %}
+              {% if tag contains 'Rings' %}
+                <button
+                  type="button"
+                  class="sizeguide-btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#sizeGuide">
+                  Size Guide
+                </button>
+                {% render 'size-guide' %}
+                {% break %}
               {% endif %}
             {% endfor %}
-          </select>
 
-
+          </div>
 
         </div>
 
@@ -189,14 +199,7 @@
     {% endcomment %}</div>
 
 </div>
-{% comment %}
-
-{% if shop.customer_accounts_enabled %}
-{% if customer %}
-<div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
-{% endif %}
-{% endif %}
-{% endcomment %}{% if product.has_only_default_variant %}
+{% if product.has_only_default_variant %}
 
   <style>
     #productSelect {

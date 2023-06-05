@@ -1,10 +1,14 @@
 <!-- /templates/customers/order.liquid -->
+<div class="position-relative article-template__background">
+  <div class="pt-4">
+    {% include 'breadcrumbs' %}
+  </div>
+</div>
 
 <div class="container my-5">
-    {% include 'breadcrumbs' %}
     <h1 class="lead">Order {{ order.name }}</h1>
 
-    <div class="row my-5">
+    <div class="row my-5 order-page">
         <div class="col-12 col-md-4">
             <div class="card">
                 <div class="card-header">Billing Information</div>

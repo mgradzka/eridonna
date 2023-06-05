@@ -1,8 +1,8 @@
-<section class="container mt-5 teaser-info">
-  <div class="flex flex-column-reverse flex-md-row gap-4 justify-content-left">
+<section class="mt-5 teaser-info container">
+  <div class="flex flex-column-reverse flex-md-row justify-content-left">
     <div class="align-self-center">
-      <h2 class="mb-3">{{ section.settings.title }}</h2>
-      <p class="mb-4">{{ section.settings.paragraph }}</p>
+      <h2 class="mb-3 display-6">{{ section.settings.title }}</h2>
+      <p class="mb-4 teaser-info-text">{{ section.settings.paragraph }}</p>
       <a class="button btn-main" href="{{ section.settings.url}}">{{ section.settings.button_label }}</a>
     </div>
     <div class="image-stack">
@@ -20,7 +20,6 @@
 {% schema %}
   {
     "name": "Teaser",
-    "class": "Teaser-section",
     "settings": [
       {
         "type": "text",
