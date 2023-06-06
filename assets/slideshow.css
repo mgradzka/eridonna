@@ -26,7 +26,7 @@
 
 
 .featured-collection-slider .carousel-cell {
-  width: 50%;
+  width: 65%;
 }
 
 .carousel-cell {
@@ -130,8 +130,14 @@
 
 .categories-slider .flickity-viewport,
 .categories-slider .carousel-cell {
+  height: 330px !important;
+}
+
+.collection .categories-slider .flickity-viewport,
+.collection .categories-slider .carousel-cell {
   height: 250px !important;
 }
+
 
 .collection .carousel-cell {
   height: auto !important;
@@ -145,6 +151,10 @@
 .featured-collection-slider .categories-slide,
 .carousel-cell {
   width: 25rem;
+}
+
+.categories-slide  span {
+  font-size: smaller;
 }
 
 .categories-slider-img {
@@ -162,6 +172,7 @@
   padding: 1rem;
   width: 100%;
   position: absolute;
+  bottom: 30px
 }
 
 .categories-slide .blog-blur{
@@ -169,7 +180,7 @@
 }
 
 .categories-slider .categories-slide {
-  width: 50% !important;
+  width: 65% !important;
 }
 
 .flickity-button {
@@ -182,16 +193,48 @@
   
 .categories-slider .flickity-viewport,
 .categories-slider .carousel-cell {
-  height: 250px !important;
+  height: 300px !important;
 }
+
+.collection .categories-slider .flickity-viewport,
+.collection .categories-slider .carousel-cell {
+  height: 300px !important;
+}
+  
+
+.categories-slider .categories-slide, .slide-content-container , .featured-collection-slider .carousel-cell{
+  width: 45% !important;
+}
+
 
 }
 
+@media screen and (min-width: 650px) and (max-width: 1080px) {
+  .categories-slider .categories-slide, .slide-content-container , .featured-collection-slider .carousel-cell{
+    width: 30% !important;
+  }
+
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1850px) { 
+  .gift-img {
+    height: 25rem;
+  }
+}
+
+@media screen and (min-width: 1850px) { 
+  .gift-img {
+    height: 100%;
+  }
+}
 
 
 @media screen and (min-width: 1080px) {
 
-  
+  .collection .categories-slider .flickity-viewport,
+.collection .categories-slider .carousel-cell {
+  height: 300px !important;
+}
   
 
   .featured-collection-slider {
@@ -232,6 +275,7 @@
 
   .categories-slide .backdrop-blur {
     width: 100%;
+    bottom: 55px;
   }
 
   .categories-slider-img {
@@ -243,11 +287,7 @@
   .slide-content-container {
     margin-top: 5rem;
     padding: 5rem;
-    width: 40rem;
-  }
-
-  .categories-slide .backdrop-blur {
-    bottom: 55px;
+    width: 42rem;
   }
 
   .categories-slide .blog-blur{
@@ -278,8 +318,6 @@
 } 
 
 .gift-img {
-  width: 100%;
-  height:100%;
   object-fit: cover;
   position:relative
 }
@@ -292,7 +330,8 @@
   position: absolute ;
   /* bottom:20px; */
   width: 100%;
-  top:60%
+  top:60%;
+  bottom:auto
 }
 
 

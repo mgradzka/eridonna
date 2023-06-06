@@ -1,7 +1,7 @@
 {% assign current_product = product.selected_or_first_available_variant %}
 
 <div class="accordion accordion-flush product-details__section" id="accordionFlushExample">
-  <div class="accordion-item">
+  <div class="accordion-item pb-3">
     <div class="accordion-header">
       <button
         class="accordion-button collapsed"
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item pt-2">
     <div class="accordion-header">
       <button
         class="accordion-button collapsed"
@@ -41,25 +41,67 @@
           <p>{{ product.metafields.custom.material }}</p>
         </div>
 
+        {% if product.tags contains 'Rings' %}
+
+          <div class="flex justify-content-between">
+            <h6>Size:
+            </h6>
+            {% for option in product.options %}
+              {% if option == 'Size' %}
+                <p>
+                  {% for variant in product.variants %}
+                    {% if forloop.last %}
+                      {{ variant.title }}
+                    {% else %}
+                      {{ variant.title }},
+                    {% endif %}
+
+                  {% endfor %}
+                </p>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
         <div class="flex justify-content-between">
           <h6>Color:
           </h6>
-         <p>
-          {% for option in product.metafields.custom.color.value %}
-           {{ option }} 
-          {% endfor %}
+          <p>
+            {% for option in product.metafields.custom.color.value %}
+              {% if forloop.last %}
+                {{ option }}
+              {% else %}
+                {{ option }},
+              {% endif %}
+            {% endfor %}
           </p>
         </div>
 
-        {% if product.metafields.custom.stone_type != blank %}
+        {% if product.metafields.custom.surface_treatment != blank %}
           <div class="flex justify-content-between">
             <h6>Surface Treatment:
             </h6>
             <p>
-            {% for surface in product.metafields.custom.surface_treatment.value %}
-             {{ surface }}
-             {% endfor %}
-             </p>
+              {% for surface in product.metafields.custom.surface_treatment.value %}
+                {% if forloop.last %}
+                  {{ surface }}
+                {% else %}
+                  {{ surface }},
+                {% endif %}
+              {% endfor %}
+            </p>
+          </div>
+        {% endif %}
+
+
+        {% if product.tags contains 'Watches' %}
+
+          <div class="flex justify-content-between">
+            <h6>Water Resistance:
+            </h6>
+
+            <p>{{ product.metafields.custom.water_resistance }}</p>
+
           </div>
         {% endif %}
 
@@ -72,17 +114,45 @@
           </div>
         {% endif %}
 
-        <div class="flex justify-content-between">
-          <h6>Size:
-          </h6>
-          <p>{{ product.metafields.custom.size }}</p>
-        </div>
+
+        {% if product.category != 'rings' %}
+
+          <div class="flex justify-content-between">
+            <h6>Measurements:
+            </h6>
+            <p>{{ product.metafields.custom.size }}</p>
+          </div>
+        {% endif %}
+
+        {% if product.tags contains 'Watches' %}
+
+          <div class="flex justify-content-between">
+            <h6>Type:
+            </h6>
+
+            <p>{{ product.metafields.custom.type }}</p>
+
+          </div>
+        {% endif %}
+
+        {% if product.tags contains 'Watches' %}
+
+          <div class="flex justify-content-between">
+            <h6>Glass:
+            </h6>
+
+            <p>{{ product.metafields.custom.glass }}</p>
+
+          </div>
+        {% endif %}
+
+
 
       </div>
     </div>
   </div>
 
-  <div class="accordion-item">
+  <div class="accordion-item pt-2">
     <div class="accordion-header">
       <button
         class="accordion-button collapsed"
@@ -98,10 +168,10 @@
       <div class="accordion-body">
         {% if product.available %}
           <p>This item is possible to be delivered to you in 1-2 work days since it is currently in stock.
-            For further details about returns read information on this page</p>
+            For further details about returns read information on <a class="text-decoration-underline" href="/pages/return-of-goods">this page.</a> </p>
         {% else %}
           <p>Item is currently not in stock, therefore delivery can take longer.
-            For further details about returns read information on this page
+            For further details about returns read information on <a class="text-decoration-underline" href="/pages/return-of-goods">this page.</a>
           </p>
         {% endif %}
 

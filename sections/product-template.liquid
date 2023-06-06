@@ -6,7 +6,7 @@
 
   <div class="row product-page-container">
 
-    <div class="col-md-6 col-12  product-image-wrapper">
+    <div class="col-md-6 col-12  product-image-wrapper p-0">
       <!-- card left -->
 
       <div class="slider-container">
@@ -45,13 +45,13 @@
 
 
     <section class="col-md-6 col-12 flex flex-column gap-3 content-wrapper">
-      <div class="flex gap-5 justify-content-between">
+      <div class="flex gap-5 justify-content-between mt-4 mt-md-0">
         <h3>{{ product.title }}</h3>
         <!-- Swym button on product pages -->
         <div class="swym-wishlist-button-bar"></div>
       </div>
       <!-- Swym button on product pages -->
-      <div class="flex justify-content-between">
+      <div class="flex justify-content-between align-items-baseline">
         {% comment %}
 
         <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
@@ -64,7 +64,7 @@
           data-auto-install='false'> {{ product.metafields.judgeme.badge }}
         </div>
         <!-- End of Judge.me code -->
-        <p>{{ current_product.price | money_with_currency }}</p>
+        <p class="fs-4 fw-bold">{{ current_product.price | money_with_currency }}</p>
       </div>
       {% form 'product', product, class: "product-form", id: "AddToCartForm" %}
         <div class="mb-3">
@@ -97,18 +97,6 @@
               Category: {{ product.type }}</p>
           </div>
 
-          {% comment %}
-
-          {% for variant in product.variants %}
-          {% if variant.available %}
-          <input type="checkbox" id="{{ variant.id }}" name="{{ variant.id }}" value="{{ variant.id }}">
-          <label for="{{ variant.id }}">{{ variant.title }}</label><br>
-          {% else %}
-          <input type="checkbox" id="{{ variant.id }}" name="{{ variant.id }}" value="{{ variant.id }}" disabled="disabled">
-          <label for="{{ variant.id }}">{{ variant.title }}</label><br>
-          {% endif %}
-          {% endfor %}
-          {% endcomment %}
 
           <div class="flex gap-4">
             <select
@@ -164,7 +152,7 @@
         <div class="flex">
           <div class="input-group align-self-center product-buttons">
             <span class="input-group-btn">
-              <button class="btn btn-default btn-subtract" type="button">-</button>
+              <button class="btn btn-default btn-subtract fs-4" type="button">-</button>
             </span>
             <input
               type="number"
@@ -174,7 +162,7 @@
               value="1"
               min="1">
             <span class="input-group-btn">
-              <button class="btn btn-default btn-add" type="button">+</button>
+              <button class="btn btn-default btn-add fs-4" type="button">+</button>
             </span>
           </div>
 
@@ -183,8 +171,8 @@
             type="submit"
             name="add"
             id="AddToCart"
-            class="button btn-main flex gap-2">Add To Cart
-            <span class="material-symbols-outlined nav-icons">shopping_bag</span>
+            class="button btn-main flex gap-2 align-items-center">Add To Cart
+            <span class="material-symbols-outlined nav-icons text-white">shopping_bag</span>
           </button>
         </div>
         {% if section.settings.dynamic_buttons_checkbox == true %}
@@ -207,5 +195,3 @@
     }
   </style>
 {% endif %}
-
-{% render 'product-recommendations' %}

@@ -97,37 +97,38 @@
       {%- endfor -%}
 
       <div class="flex mt-4 gap-2">
+
+        <div class="active-filters">
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="active-filters__clear button btn-sec">Clear all</a>
+
+        </div>
         <div class="filter-group-display__submit">
           <input
             class="button btn-main"
             type="submit"
             value="Apply">
         </div>
-        <div class="active-filters">
-          <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}" class="active-filters__clear button btn-main">Clear all</a>
-
-        </div>
 
 
-        
-        {%- for filter in collection.filters -%}
-          {%- if filter.type == "price_range" -%}
-            {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
-              <a class="active-filters__remove-filter" href="{{ filter.url_to_remove }}">
-                {%- assign min_value = filter.min_value.value | default: 0 -%}
-                {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
-                {{ min_value | money }} - {{ max_value | money }} X
-              </a>
-            {%- endif -%}
-          {%- else -%}
-            {%- for filter_value in filter.active_values -%}
-              <a class="active-filters__remove-filter" href="{{ filter_value.url_to_remove }}">
-                {{ filter.label }}: {{ filter_value.label }} X
-              </a>
-            {%- endfor -%}
-          {%- endif- %}
-        {%- endfor -%}
+
       </div>
+      {%- for filter in collection.filters -%}
+        {%- if filter.type == "price_range" -%}
+          {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+            <a class="active-filters__remove-filter" href="{{ filter.url_to_remove }}">
+              {%- assign min_value = filter.min_value.value | default: 0 -%}
+              {%- assign max_value = filter.max_value.value | default: filter.range_max -%}
+              {{ min_value | money }} - {{ max_value | money }} X
+            </a>
+          {%- endif -%}
+        {%- else -%}
+          {%- for filter_value in filter.active_values -%}
+            <a class="active-filters__remove-filter" href="{{ filter_value.url_to_remove }}">
+              {{ filter.label }}: {{ filter_value.label }} X
+            </a>
+          {%- endfor -%}
+        {%- endif- %}
+      {%- endfor -%}
     </div>
   </form>
 

@@ -42,7 +42,7 @@
     display: flex;
     height: 100vh;
     flex-direction: column;
-    width: 30%;
+    
     
     /* row-gap: 35vw; */
     transform: translateX(-150vw);
@@ -86,4 +86,14 @@
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
   padding: 0.5rem 1rem;
+}
+
+
+
+@media screen and (min-width: 1080px) {
+
+.filter-container {
+  width: 30%;
+}
+
 }

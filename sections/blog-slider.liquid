@@ -35,6 +35,7 @@ https://www.youtube.com/watch?v=40OSeBrKALs&ab_channel=CodingwithJan-ShopifyDeve
             <img class="categories-slider-img" src=" {{ article.image | img_url: 'master' }} ">
             <div class="backdrop-blur blog-blur">
               <h4 class="blog-slider-title">{{ article.title }}</h4>
+              <span class="text-white">{{ article.published_at | date: '%Y-%m-%d' }}</span>
             </div>
           </a>
         </div>

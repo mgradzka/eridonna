@@ -1,7 +1,7 @@
-<section class="shop-the-look ">
-    <h2 class="display-6">Shop The Look</h2>
-    
-    <div class="flex flex-column flex-md-row gap-4 justify-content-left">
+<section class="shop-the-look container ">
+  <h2 class="display-6">Shop The Look</h2>
+
+  <div class="flex flex-column flex-md-row gap-4 justify-content-left">
     <div class="shop-container">
       <img
         src="{{ section.settings.image1 | img_url: 'master' }}"
@@ -31,7 +31,8 @@
         <div class="modal-content">
 
           <div class="modal-body  p-0">
-            <section class="flex">
+            <section class="flex flex-column-reverse flex-md-row ">
+
               <img
                 src="{{ section.settings.image1 | img_url: 'master' }}"
                 class="modal-img-shop"
@@ -74,12 +75,22 @@
 
 
                           <div class="product-content p-2">
-                            <h3>{{ block.settings.product.title }}</h3>
+                            <h3 class="product-title">{{ block.settings.product.title }}</h3>
 
 
 
-                            <p class="collection-page__brand">
-                              {{ block.settings.product.metafields.custom.brand }} | {{ product.type }}</p>
+                            <div class="collection-page__brand mb-2 ">
+                              <a href="https://eridonna.myshopify.com/collections/{{ block.settings.product.metafields.custom.brand }}" class="product-vendor">
+                                {{ block.settings.product.vendor }}
+                              </a>
+                              <span>
+                                |
+                              </span>
+
+                              <a href="https://eridonna.myshopify.com/collections/{{ block.settings.product.type }}">
+                                {{ block.settings.product.type }}</a>
+                            </div>
+
                             <div class="flex justify-content-between collection-page__money">
                               {% if block.settings.product.available %}
                                 <div class="flex align-items-baseline gap-2">
@@ -90,7 +101,7 @@
                               {% else %}
                                 <div class="flex align-items-baseline gap-2">
                                   <div class="dot red-dot"></div>
-                                  <p>Available, longer delivery</p>
+                                  <p class="longer-delivery">Available, longer delivery</p>
                                 </div>
                               {% endif %}
                               <p>{{ block.settings.product.price | money_without_trailing_zeros }}</p>
@@ -142,7 +153,7 @@
         <div class="modal-content">
 
           <div class="modal-body  p-0">
-            <section class="flex">
+            <section class="flex  flex-column-reverse flex-md-row ">
               <img
                 src="{{ section.settings.image2 | img_url: 'master' }}"
                 class="modal-img-shop"
@@ -185,12 +196,22 @@
 
 
                           <div class="product-content p-2">
-                            <h3>{{ block.settings.product.title }}</h3>
+                            <h3 class="product-title">{{ block.settings.product.title }}</h3>
 
 
 
-                            <p class="collection-page__brand">
-                              {{ block.settings.product.metafields.custom.brand }} | {{ product.type }}</p>
+                            <div class="collection-page__brand mb-2 ">
+                              <a href="https://eridonna.myshopify.com/collections/{{ block.settings.product.metafields.custom.brand }}" class="product-vendor">
+                                {{ block.settings.product.vendor }}
+                              </a>
+                              <span>
+                                |
+                              </span>
+
+                              <a href="https://eridonna.myshopify.com/collections/{{ block.settings.product.type }}">
+                                {{ block.settings.product.type }}</a>
+                            </div>
+
                             <div class="flex justify-content-between collection-page__money">
                               {% if block.settings.product.available %}
                                 <div class="flex align-items-baseline gap-2">
@@ -201,7 +222,7 @@
                               {% else %}
                                 <div class="flex align-items-baseline gap-2">
                                   <div class="dot red-dot"></div>
-                                  <p>Not In-Stock</p>
+                                  <p class="longer-delivery">Available, longer delivery</p>
                                 </div>
                               {% endif %}
                               <p>{{ block.settings.product.price | money_without_trailing_zeros }}</p>

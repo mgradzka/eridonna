@@ -3,7 +3,7 @@
 <div class="collection-page__background py-4 px-1 ">
 
   <div class="collection-page__background_text p-4">
-    <h1 class="text-center mb-2">{{ collection.title }}</h1>
+    <h1 class="text-center mb-2 text-white">{{ collection.title }}</h1>
     <p class="text-center">{{ collection.description }}</p>
   </div>
 </div>
@@ -17,12 +17,12 @@
   <div class="container collection-page">
     {% paginate collection.products by 8 %}
 
-      <div class="sticky-top justify-content-between flex mt-5 py-4 bg-white">
+      <div class="sticky-top justify-content-between  align-items-baseline flex mt-5 py-4 bg-white">
 
         {% render 'filtering' %}
         {% render 'sorting' %}
       </div>
-      <div class="row justify-content-left my-3 mx-1  ">
+      <div class="row justify-content-left">
 
 
         {% for product in collection.products %}
@@ -33,12 +33,13 @@
             the card here is the same as in featured collection - it should be moved to snippets!
             {% endcomment %}
             <article>
-              
 
-                <!-- Swym Wishlist Plus EPI Button-->
 
-                <!-- Swym Wishlist Plus EPI Button-->
-               <div class="background-effect"> <img
+              <!-- Swym Wishlist Plus EPI Button-->
+
+              <!-- Swym Wishlist Plus EPI Button-->
+                <a href="{{ product.url }}"> <div class="background-effect mb-2">
+                  <img
                     class="main collection-page-img"
                     src="{{ product.featured_image.src | img_url: 'master' }}"
                     alt="{{ product.featured_image.alt }}">
@@ -56,35 +57,39 @@
                     data-variant-id="{{product.variants[0].id}}"
                     data-product-url="{{ shop.url }}{{ product.url }}"></button>
                 </div>
+              
 
 
 
+                <h3 class="px-2 product-title">{{ product.title }}</h3>
+                </a>
+                
                 <div class="product-content p-2">
-                  <a href="{{ product.url }}">    <h3>{{ product.title }}</h3></a>
 
 
-
-                  <p class="collection-page__brand">
-                    <a href="https://eridonna.myshopify.com/collections/{{ product.metafields.custom.brand }}">
-                      {{ product.vendor }}</a>
-                    |  <a href="https://eridonna.myshopify.com/collections/{{ product.type }}">{{ product.type }}</a> </p>
-                  <div class="flex justify-content-between collection-page__money">
-                    {% if product.available %}
-                      <div class="flex align-items-baseline gap-2">
-                        <div class="dot green-dot"></div>
-                        <p>In Stock</p>
-                      </div>
-
-                    {% else %}
-                      <div class="flex align-items-baseline gap-2">
-                        <div class="dot red-dot"></div>
-                        <p>Available, longer delivery</p>
-                      </div>
-                    {% endif %}
-                    <p>{{ product.price | money_without_trailing_zeros }}</p>
-                  </div>
+                <div class="collection-page__brand mb-2 ">
+               <a href="https://eridonna.myshopify.com/collections/{{ product.metafields.custom.brand }}" class="product-vendor">
+                    {{ product.vendor }} </a>   <span> | </span>
+                
+                  <a href="https://eridonna.myshopify.com/collections/{{ product.type }}"> {{ product.type }}</a>
                 </div>
-            
+                <div class="flex justify-content-between collection-page__money align-items-end">
+                  {% if product.available %}
+                    <div class="flex align-items-baseline gap-2">
+                      <div class="dot green-dot"></div>
+                      <p>In Stock</p>
+                    </div>
+
+                  {% else %}
+                    <div class="flex align-items-baseline gap-2">
+                      <div class="dot red-dot"></div>
+                      <p class="longer-delivery">Available, longer delivery</p>
+                    </div>
+                  {% endif %}
+                  <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
+                </div>
+              </div>
+
             </article>
           </div>
 
