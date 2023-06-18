@@ -41,28 +41,6 @@
           <p>{{ product.metafields.custom.material }}</p>
         </div>
 
-        {% if product.tags contains 'Rings' %}
-
-          <div class="flex justify-content-between">
-            <h6>Size:
-            </h6>
-            {% for option in product.options %}
-              {% if option == 'Size' %}
-                <p>
-                  {% for variant in product.variants %}
-                    {% if forloop.last %}
-                      {{ variant.title }}
-                    {% else %}
-                      {{ variant.title }},
-                    {% endif %}
-
-                  {% endfor %}
-                </p>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-
         <div class="flex justify-content-between">
           <h6>Color:
           </h6>
@@ -115,14 +93,14 @@
         {% endif %}
 
 
-        {% if product.category != 'rings' %}
+        {% unless product.tags contains 'Rings' %}
 
           <div class="flex justify-content-between">
             <h6>Measurements:
             </h6>
             <p>{{ product.metafields.custom.size }}</p>
           </div>
-        {% endif %}
+      {% endunless %}
 
         {% if product.tags contains 'Watches' %}
 

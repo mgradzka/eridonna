@@ -1,4 +1,4 @@
-{% paginate search.results by 10 %}
+{% paginate search.results by 12 %}
 
   <div class="container my-5">
     <div class="row">
@@ -31,10 +31,10 @@
     </div>
 
     <div class="row">
-      <h1>{{ search.results_count }} search results</h1>
+      <h1 class="mt-2">{{ search.results_count }} search results</h1>
     </div>
 
-    <div class="row row-cols-3 g-2 my-5">
+    <div class="row row-cols-2 row-cols-md-3 g-2 my-5">
       {% if search.performed %}
         {% for item in search.results %}
 

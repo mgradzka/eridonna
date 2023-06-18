@@ -18,9 +18,10 @@
               class="grid-item background-effect"
               src="{{ product_image | img_url: 'large'}}"
               alt="{{ product_image.alt }}"
-              class="small-image"
-              data-toggle="modal"
-              data-target="#myModal">
+              class="small-image">
+              {% if product.price < product.compare_at_price %}
+              {% render 'sale' %}
+          {% endif %}
           </div>
           {% for image in product.images %}
             {% if image.src != product_image %}
@@ -64,7 +65,18 @@
           data-auto-install='false'> {{ product.metafields.judgeme.badge }}
         </div>
         <!-- End of Judge.me code -->
-        <p class="fs-4 fw-bold">{{ current_product.price | money_with_currency }}</p>
+        <div class="fs-4 ">
+
+
+
+          {% if current_product.price < product.compare_at_price %}
+            <span class="text-decoration-line-through text-secondary">
+              {{ product.compare_at_price | money_with_currency }}</span>
+
+          {% endif %}
+          <span class="fw-bold ms-2">
+            {{ current_product.price | money_with_currency }}</span>
+        </div>
       </div>
       {% form 'product', product, class: "product-form", id: "AddToCartForm" %}
         <div class="mb-3">

@@ -482,6 +482,13 @@ footer.divider section {
   top: 10px;
 }
 
+.sale-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 99;
+}
+
 .collection-page-img {
   width: 100%;
   aspect-ratio: 1/1;
@@ -1156,6 +1163,8 @@ footer.divider section {
 
 @media screen and (min-width: 1080px) {
 
+
+
   .ring-tips {
     margin: 2rem 0;
     display: grid;
@@ -1217,34 +1226,34 @@ footer.divider section {
     font-size: 1.3rem;
   }
 
-  table caption {
+  .cart-table table caption, .account table caption {
     font-size: 1.5em;
   }
 
-  thead {
+  .cart-table thead, .account thead{
     display: table-header-group;
   }
 
-  tr {
+  .cart-table tr, .account tr {
     display: table-row;
     border: 0;
   }
 
-  th,
-  td {
+  .cart-table th, .cart-table 
+  td, .account th, .account td {
     text-align: left;
   }
 
-  th {
+  .cart-table th, .account th {
     font-size: 0.85em;
   }
 
-  td {
+  .cart-table td, .account td {
     display: table-cell;
     border-bottom: none;
   }
 
-  td:before {
+  .cart-table td:before, .account td:before {
     display: none !important;
   }
 
@@ -1286,8 +1295,8 @@ footer.divider section {
     display: none;
   }
 
-  navbar ul.dropdown-menu {
-    background-color: white !important;
+  navbar ul.dropdown-menu.show {
+    padding-right: 1rem;
   }
   .nav-icons-mobile {
     display: none;
