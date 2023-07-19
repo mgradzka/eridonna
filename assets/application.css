@@ -272,44 +272,6 @@ nav {
   font-size: 0.7rem;
 }
 
-.search-item {
-  width: 100%;
-  border: 1px solid #f7f6f3;
-}
-
-.search-item p {
-  font-size: 1rem;
-}
-
-
-.search-item img {
-  object-fit: cover;
-  width: 3rem;
-  aspect-ratio: 1/1;
-}
-.search-results {
-  background-color: white;
-  z-index: 9999;
-}
-
-
-
-.search-container {
-  border: 1px solid #f7f6f3;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.071);
-  border-top: none;
-  overflow: scroll;
-  max-height: 15rem;
-  display: none;
-}
-.form-control:focus {
-  box-shadow: none;
-  background-color: #f7f6f3;
-}
-
-.navbar-nav input:focus {
-  background-color: white;
-}
 /* .shopping-bag {
   position: absolute
 } */
@@ -516,13 +478,6 @@ footer.divider section {
   position: absolute;
   right: 10px;
   top: 10px;
-}
-
-.sale-button {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  z-index: 99;
 }
 
 .collection-page-img {
@@ -1225,26 +1180,6 @@ footer.divider section {
 /* MEDIA QUERIES FOR DESKTOP */
 
 @media screen and (min-width: 1080px) {
-  
-.search-item img {
-  height: 4rem;
-  width: 4rem;
-}
-
-  .search-desktop {
-    position: relative;
-  }
-
-  .search-results {
-    position: absolute;
-  }
-  .navbar-nav input {
-    background-color: #f7f6f3;
-  }
-
-  .navbar-nav input:focus {
-    background-color: #f7f6f3;
-  }
 
   .ring-tips {
     margin: 2rem 0;
@@ -1307,42 +1242,34 @@ footer.divider section {
     font-size: 1.3rem;
   }
 
-  .cart-table table caption,
-  .account table caption {
+  table caption {
     font-size: 1.5em;
   }
 
-  .cart-table thead,
-  .account thead {
+  thead {
     display: table-header-group;
   }
 
-  .cart-table tr,
-  .account tr {
+  tr {
     display: table-row;
     border: 0;
   }
 
-  .cart-table th,
-  .cart-table td,
-  .account th,
-  .account td {
+  th,
+  td {
     text-align: left;
   }
 
-  .cart-table th,
-  .account th {
+  th {
     font-size: 0.85em;
   }
 
-  .cart-table td,
-  .account td {
+  td {
     display: table-cell;
     border-bottom: none;
   }
 
-  .cart-table td:before,
-  .account td:before {
+  td:before {
     display: none !important;
   }
 
@@ -1384,8 +1311,8 @@ footer.divider section {
     display: none;
   }
 
-  navbar ul.dropdown-menu.show {
-    padding-right: 1rem;
+  navbar ul.dropdown-menu {
+    background-color: white !important;
   }
   .nav-icons-mobile {
     display: none;
