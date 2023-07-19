@@ -29,15 +29,8 @@
 
           <div class="col-6 col-sm-3 g-2 g-sm-3 ">
 
-            {% comment %}
-            the card here is the same as in featured collection - it should be moved to snippets!
-            {% endcomment %}
+         
             <article>
-
-
-              <!-- Swym Wishlist Plus EPI Button-->
-
-              <!-- Swym Wishlist Plus EPI Button-->
                 <a href="{{ product.url }}"> <div class="background-effect mb-2">
                   <img
                     class="main collection-page-img"
@@ -56,6 +49,9 @@
                     data-product-id="{{product.id | json}}"
                     data-variant-id="{{product.variants[0].id}}"
                     data-product-url="{{ shop.url }}{{ product.url }}"></button>
+                    {% if product.price < product.compare_at_price %}
+                    {% render 'sale' %}
+                {% endif %}
                 </div>
               
 
@@ -86,7 +82,14 @@
                       <p class="longer-delivery">Available, longer delivery</p>
                     </div>
                   {% endif %}
-                  <p class="price">{{ product.price | money_without_trailing_zeros }}</p>
+                  <p class="price flex">
+                    {% if product.price < product.compare_at_price %}
+                    <span class="d-none d-md-block text-decoration-line-through text-secondary">
+                      {{ product.compare_at_price | money_with_currency }}</span>
+        
+                  {% endif %}
+                  <span class="fw-bold ms-2">
+                    {{ product.price | money_with_currency }}</span>
                 </div>
               </div>
 

@@ -6,7 +6,8 @@
 
     <div class="input-group flex-nowrap">
       <input
-        class="form-control"
+      id="searchInputField"
+        class="form-control rounded-0"
         type="text"
         name="q"
         value="{{ search.terms | escape }}"
@@ -16,7 +17,7 @@
 
       <button
         type="submit"
-        class="input-group-text"
+        class="input-group-text rounded-0"
         id="addon-wrapping">
         <span class="material-symbols-outlined">
           search
@@ -28,3 +29,10 @@
 
 
   </form>
+
+  <div class="flex flex-column search-results w-100">
+    <div id="searchInputContainer" class="search-container rounded-0">
+
+    </div>
+
+  </div>

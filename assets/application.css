@@ -17,7 +17,7 @@ body {
 }
 
 main {
-  padding-bottom: 150px; 
+  padding-bottom: 150px;
 }
 
 footer {
@@ -99,7 +99,6 @@ h4 {
 .search-nav input,
 .search-nav button {
   border: none;
-  background-color: #f7f6f3;
 }
 
 .search-mobile .search-nav button {
@@ -254,9 +253,9 @@ nav {
   box-shadow: none;
 }
 
-.search-desktop {
+/* .search-desktop {
   display: none;
-}
+} */
 
 #mobile {
   font-size: 2rem;
@@ -266,14 +265,51 @@ nav {
   font-size: 1.5rem;
 }
 
-#numberOfCartItem1,
-#numberOfCartItem2 {
+#numberOfCartItems {
   position: relative;
   top: 0;
   left: 14px;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 
+.search-item {
+  width: 100%;
+  border: 1px solid #f7f6f3;
+}
+
+.search-item p {
+  font-size: 1rem;
+}
+
+
+.search-item img {
+  object-fit: cover;
+  width: 3rem;
+  aspect-ratio: 1/1;
+}
+.search-results {
+  background-color: white;
+  z-index: 9999;
+}
+
+
+
+.search-container {
+  border: 1px solid #f7f6f3;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.071);
+  border-top: none;
+  overflow: scroll;
+  max-height: 15rem;
+  display: none;
+}
+.form-control:focus {
+  box-shadow: none;
+  background-color: #f7f6f3;
+}
+
+.navbar-nav input:focus {
+  background-color: white;
+}
 /* .shopping-bag {
   position: absolute
 } */
@@ -480,6 +516,13 @@ footer.divider section {
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+.sale-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  z-index: 99;
 }
 
 .collection-page-img {
@@ -747,7 +790,7 @@ footer.divider section {
 } */
 
 .product-details__section .accordion-item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.466) !important
+  border-bottom: 1px solid rgba(0, 0, 0, 0.466) !important;
 }
 
 .forgot-password {
@@ -790,7 +833,8 @@ footer.divider section {
   vertical-align: middle;
 }
 
-.product-title, .swym-title {
+.product-title,
+.swym-title {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -898,7 +942,8 @@ footer.divider section {
   background: rgba(0, 0, 0, 0.3);
 }
 
-.account table, .cart-table table {
+.account table,
+.cart-table table {
   border: 0;
   border-collapse: collapse;
   margin: 0;
@@ -907,31 +952,37 @@ footer.divider section {
   table-layout: fixed;
 }
 
-.cart-table caption, .account caption {
+.cart-table caption,
+.account caption {
   text-align: left;
   font-size: 1.3em;
   margin: 0.5em 0 0.75em;
 }
 
-.cart-table thead, .account thead {
+.cart-table thead,
+.account thead {
   display: none;
 }
 
-.cart-table tr, .account tr {
+.cart-table tr,
+.account tr {
   display: block;
   border-bottom: 1px solid grey;
   padding: 1em 1em 0.5em;
 }
 
-.cart-table tr:last-child, .account tr:last-child{
+.cart-table tr:last-child,
+.account tr:last-child {
   border-bottom: none;
 }
 
-.cart-table tr + tr, .account tr + tr {
+.cart-table tr + tr,
+.account tr + tr {
   margin-top: 0.625em;
 }
 
-.cart-table td, .account td {
+.cart-table td,
+.account td {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -939,7 +990,8 @@ footer.divider section {
   line-height: 1.35em;
 }
 
-.cart-table td:before, .account td:before {
+.cart-table td:before,
+.account td:before {
   content: attr(data-label);
   font-size: 0.9em;
   text-align: left;
@@ -949,16 +1001,19 @@ footer.divider section {
   color: #545454;
 }
 
-.cart-table td + td, .account td + td {
+.cart-table td + td,
+.account td + td {
   margin-top: 0.8em;
 }
 
-.cart-table td:last-child, .account td:last-child {
+.cart-table td:last-child,
+.account td:last-child {
   border-bottom: 0;
 }
 
 .table-quantity {
   width: 5rem !important;
+  padding: 10px;
 }
 
 .sizeguide-btn {
@@ -1058,8 +1113,26 @@ footer.divider section {
   position: absolute;
 }
 
+.img-cart {
+  object-fit: cover;
+}
 
+.quantity-button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+}
 
+.table-quantity {
+  height: 2rem;
+  width: 2.4rem !important;
+}
+
+.cart-quantity-selector {
+  display: flex;
+}
 /********************* MEDIA QUERIES FOR SMALLER DEVICES ********************/
 @media screen and (min-width: 300px) and (max-width: 480) {
 }
@@ -1076,8 +1149,6 @@ footer.divider section {
 /*********** MEDIA QUERIES FOR BIGGER TABLET***********/
 
 @media screen and (min-width: 650px) and (max-width: 1080px) {
-
-
   .next-button,
   .prev-button {
     display: none;
@@ -1094,7 +1165,7 @@ footer.divider section {
     -moz-transition: none;
     -ms-transition: none;
     -o-transition: none;
-}
+  }
 
   .slider img {
     width: 50vw;
@@ -1105,12 +1176,11 @@ footer.divider section {
     height: auto;
   }
 
-  .button, #swym-custom-add-toCartBtn {
+  .button,
+  #swym-custom-add-toCartBtn {
     padding: 0.5rem 2.5rem;
     font-size: inherit;
   }
-
-
 
   .navbar {
     padding: 0 1rem 1rem 1rem;
@@ -1140,9 +1210,9 @@ footer.divider section {
     display: none;
   }
 
-  .search-desktop {
+  /* .search-desktop {
     display: block;
-  }
+  } */
   .nav-icons-mobile {
     display: none;
   }
@@ -1155,6 +1225,26 @@ footer.divider section {
 /* MEDIA QUERIES FOR DESKTOP */
 
 @media screen and (min-width: 1080px) {
+  
+.search-item img {
+  height: 4rem;
+  width: 4rem;
+}
+
+  .search-desktop {
+    position: relative;
+  }
+
+  .search-results {
+    position: absolute;
+  }
+  .navbar-nav input {
+    background-color: #f7f6f3;
+  }
+
+  .navbar-nav input:focus {
+    background-color: #f7f6f3;
+  }
 
   .ring-tips {
     margin: 2rem 0;
@@ -1217,34 +1307,42 @@ footer.divider section {
     font-size: 1.3rem;
   }
 
-  table caption {
+  .cart-table table caption,
+  .account table caption {
     font-size: 1.5em;
   }
 
-  thead {
+  .cart-table thead,
+  .account thead {
     display: table-header-group;
   }
 
-  tr {
+  .cart-table tr,
+  .account tr {
     display: table-row;
     border: 0;
   }
 
-  th,
-  td {
+  .cart-table th,
+  .cart-table td,
+  .account th,
+  .account td {
     text-align: left;
   }
 
-  th {
+  .cart-table th,
+  .account th {
     font-size: 0.85em;
   }
 
-  td {
+  .cart-table td,
+  .account td {
     display: table-cell;
     border-bottom: none;
   }
 
-  td:before {
+  .cart-table td:before,
+  .account td:before {
     display: none !important;
   }
 
@@ -1278,16 +1376,16 @@ footer.divider section {
     font-weight: 500;
   }
 
-  .search-desktop {
+  /* .search-desktop {
     display: block;
-  }
+  } */
 
   .search-mobile {
     display: none;
   }
 
-  navbar ul.dropdown-menu {
-    background-color: white !important;
+  navbar ul.dropdown-menu.show {
+    padding-right: 1rem;
   }
   .nav-icons-mobile {
     display: none;
@@ -1499,7 +1597,6 @@ footer.divider section {
     grid-template-columns: 1fr 1fr 1fr 1fr !important;
     grid-template-rows: 1fr !important;
   }
-
 
   .close {
     margin-top: 10rem;

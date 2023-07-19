@@ -1,23 +1,74 @@
-// Put your application javascript here
+// scroll up option
 
-window.addEventListener('scroll', function() {
-  const scrollToTopButton = document.getElementById('scrollToTopButton');
-  if (window.pageYOffset > 200) { // Adjust the value as needed
-    scrollToTopButton.style.display = 'block';
+function formatMoney(cents, format) {
+  if (typeof cents == "string") {
+    cents = cents.replace(".", "");
+  }
+  var value = "";
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  var formatString = format || this.money_format;
+
+  function defaultOption(opt, def) {
+    return typeof opt == "undefined" ? def : opt;
+  }
+
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultOption(precision, 2);
+    thousands = defaultOption(thousands, ",");
+    decimal = defaultOption(decimal, ".");
+
+    if (isNaN(number) || number == null) {
+      return 0;
+    }
+
+    number = (number / 100.0).toFixed(precision);
+
+    var parts = number.split("."),
+      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + thousands),
+      cents = parts[1] ? decimal + parts[1] : "";
+
+    return dollars + cents;
+  }
+
+  switch (formatString.match(placeholderRegex)[1]) {
+    case "amount":
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case "amount_no_decimals":
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case "amount_with_comma_separator":
+      value = formatWithDelimiters(cents, 2, ".", ",");
+      break;
+    case "amount_no_decimals_with_comma_separator":
+      value = formatWithDelimiters(cents, 0, ".", ",");
+      break;
+  }
+
+  return formatString.replace(placeholderRegex, value);
+}
+
+window.addEventListener("scroll", function () {
+  const scrollToTopButton = document.getElementById("scrollToTopButton");
+  if (window.pageYOffset > 200) {
+    // Adjust the value as needed
+    scrollToTopButton.style.display = "block";
   } else {
-    scrollToTopButton.style.display = 'none';
+    scrollToTopButton.style.display = "none";
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  const scrollToTopButton = document.getElementById('scrollToTopButton');
-  scrollToTopButton.addEventListener('click', function() {
+document.addEventListener("DOMContentLoaded", function () {
+  const scrollToTopButton = document.getElementById("scrollToTopButton");
+  scrollToTopButton.addEventListener("click", function () {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   });
 });
+
+// sorting
 
 if (document.getElementById("sort_by") != null) {
   document.querySelector("#sort_by").addEventListener("change", function (e) {
@@ -28,34 +79,7 @@ if (document.getElementById("sort_by") != null) {
   });
 }
 
-if (document.getElementById("country") != null) {
-  document.getElementById("country").addEventListener("change", function (e) {
-    const provinces =
-      this.options[this.selectedIndex].getAttribute("data-provinces");
-    const provinceSelector = document.getElementById("province");
-    const provinceArray = JSON.parse(provinces);
-
-    // console.log(provinceArray);
-    if (provinceArray.length < 1) {
-      provinceSelector.setAttribute("disabled", "disabled");
-    } else {
-      provinceSelector.removeAttribute("disabled");
-    }
-
-    provinceSelector.innerHTML = "";
-    let options = "";
-    for (let i = 0; i < provinceArray.length; i++) {
-      options +=
-        '<option value="' +
-        provinceArray[i][0] +
-        '">' +
-        provinceArray[i][0] +
-        "</option>";
-    }
-
-    provinceSelector.innerHTML = options;
-  });
-}
+// forgotten password
 
 if (document.getElementById("forgotPassword") != null) {
   document.getElementById("forgotPassword").addEventListener("click", (e) => {
@@ -70,62 +94,34 @@ if (document.getElementById("forgotPassword") != null) {
   });
 }
 
-// const productModal = new bootstrap.Modal(
-//   document.getElementById("productInfoModal"),
-//   {}
-// );
-
-// const productInfoAnchors = document.querySelectorAll("#productInfoAnchor");
-// if (productInfoAnchors.length > 0) {
-//   productInfoAnchors.forEach((item) => {
-//     item.addEventListener("click", (event) => {
-//       const url = '/products/' + item.getAttribute('product-handle') + '.js';
-//       fetch(url)
-//         .then((resp) => resp.json())
-//         .then(function (data) {
-//           console.log(data);
-
-//           document.getElementById('productInfoImg').src = data.images[0];
-//           document.getElementById('productInfoTitle').innerHTML = data.title;
-//           document.getElementById('productInfoPrice').innerHTML = item.getAttribute('product-price');
-//           document.getElementById('productInfoDescription').innerHTML = data.description;
-
-//           productModal.show();
-//         });
-
-//     });
-//   });
-// }
-
 if (document.getElementById("forgotPasswordAccount") != null) {
-  document.getElementById("forgotPasswordAccount").addEventListener("click", (e) => {
-    const link = document.querySelector("#forgot_password_account");
-    if (link.classList.contains("d-none")) {
-      link.classList.remove("d-none");
-      link.classList.add("d-block");
-    } else {
-      link.classList.add("d-none");
-      link.classList.remove("d-block");
-    }
-  });
+  document
+    .getElementById("forgotPasswordAccount")
+    .addEventListener("click", (e) => {
+      const link = document.querySelector("#forgot_password_account");
+      if (link.classList.contains("d-none")) {
+        link.classList.remove("d-none");
+        link.classList.add("d-block");
+      } else {
+        link.classList.add("d-none");
+        link.classList.remove("d-block");
+      }
+    });
 }
 
-document.addEventListener("DOMContentLoaded", (data) => {
-  updateCart(data);
+// nav box shadow
+window.addEventListener("scroll", function () {
+  const scrollPosition =
+    window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollPosition > 100) {
+    navbar.classList.add("scrolled-nav");
+  } else {
+    navbar.classList.remove("scrolled-nav");
+  }
 });
 
-async function updateCart(data) {
-  try {
-    const response = await fetch("/cart.js");
-    const data = await response.json();
-    document.querySelector("#numberOfCartItem1").innerHTML = data.item_count;
-    document.querySelector("#numberOfCartItem2").innerHTML = data.item_count;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// menu
+// navbar
 const menuElm = document.querySelector(".navbar-toggler");
 const icon = document.querySelector(".navbar-toggler-icon");
 const fontawesome = document.getElementById("mobile");
@@ -140,7 +136,7 @@ menuElm.addEventListener("click", function (event) {
   }
 });
 
-
+// filters
 
 const filterContainer = document.querySelector(".filter-container");
 const filterIcon = document.getElementById("filter-icon");
@@ -161,20 +157,7 @@ if (filterIcon) {
   });
 }
 
-// const generalDescription = document.querySelector('.general-description')
-// const technicalInformation = document.querySelector('.technical-description')
-// const generalText = document.querySelector('.general-description-text')
-// const technicalText = document.querySelector('.technical-description-text')
-
-// if (generalDescription) {
-//   generalDescription.addEventListener('click', (e) => {
-//     if (generalText.className.indexOf("display-none") === -1) {
-//       generalText.classList.add("display-none");
-//     } else {
-//       generalText.classList.remove("display-none");
-//     }
-//   })
-// }
+// brand page button toggler
 
 const allButton = document.getElementById("allButton");
 const watchesButton = document.getElementById("watchesButton");
@@ -197,7 +180,7 @@ if (allButton && watchesButton && jewelryButton) {
   });
 }
 
-// Check if the articles exist before performing operations on them
+// Checking if the articles exist before performing operations on them
 const articles = document.getElementsByClassName("article");
 
 if (articles) {
@@ -238,11 +221,12 @@ function setActiveButton(button) {
   }
 }
 
-setActiveButton(allButton)
+setActiveButton(allButton);
 
 const productPage = document.querySelector("#productPage");
 
 if (productPage != null) {
+  // mobile slider
   const slider = document.querySelector(".slider");
   const prevButton = document.querySelector(".prev-button");
   const nextButton = document.querySelector(".next-button");
@@ -277,19 +261,18 @@ if (productPage != null) {
   const minimum = 1;
 
   minus.addEventListener("click", () => {
-    if (quantityNumber > minimum) {
+    if (quantityNumber.value > minimum) {
       currentValue -= 1;
       quantityNumber.value = currentValue;
-      console.log(currentValue);
     }
   });
 
   add.addEventListener("click", () => {
     currentValue += 1;
     quantityNumber.value = currentValue;
-    console.log(currentValue);
   });
 
+  // sticky gallery
   window.addEventListener("scroll", function () {
     const container = document.querySelector(".product-page-container");
     const imageWrapper = document.querySelector(".product-image-wrapper");
@@ -306,41 +289,24 @@ if (productPage != null) {
       imageWrapper.classList.remove("sticky");
     }
   });
-
-
-
-
 }
 
 const collectionPage = document.querySelector(".collection-page");
 const navbar = document.querySelector(".navbar");
 const mainContent = document.querySelector("main");
 if (collectionPage) {
+  // navbar not sticky on collection page
   navbar.classList.remove("fixed-top");
   mainContent.classList.remove("margin-top");
 }
 
-
-// nav box shadow
-window.addEventListener('scroll', function() {
-  const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-  if (scrollPosition > 100) { // Change 100 to the appropriate scroll position where you want to change the navbar color
-    navbar.classList.add('scrolled-nav');
-  } else {
-    navbar.classList.remove('scrolled-nav');
-  }
-});
-
-
 // account page - dynamic content
 const accountButtons = document.querySelectorAll("#btn-account");
 const accountContent = document.querySelectorAll("[id^='accountcontent']");
-const spantext =  document.querySelectorAll(".span-account")
-// const button3 = document.getElementById("button3");
+const spantext = document.querySelectorAll(".span-account");
 
 for (let i = 0; i < accountButtons.length; i++) {
-  accountButtons[i].addEventListener("click", function() {
+  accountButtons[i].addEventListener("click", function () {
     const target = accountButtons[i].getAttribute("data-target");
     showContent(target);
     hideOtherContents(target);
@@ -371,3 +337,4 @@ function ActiveButton(button) {
   }
   button.classList.add("btn-active");
 }
+
