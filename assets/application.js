@@ -1,4 +1,54 @@
-// Put your application javascript here
+// scroll up option
+
+// const { default: axios } = require("axios");
+
+function formatMoney(cents, format) {
+  if (typeof cents == "string") {
+    cents = cents.replace(".", "");
+  }
+  var value = "";
+  var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+  var formatString = format || this.money_format;
+
+  function defaultOption(opt, def) {
+    return typeof opt == "undefined" ? def : opt;
+  }
+
+  function formatWithDelimiters(number, precision, thousands, decimal) {
+    precision = defaultOption(precision, 2);
+    thousands = defaultOption(thousands, ",");
+    decimal = defaultOption(decimal, ".");
+
+    if (isNaN(number) || number == null) {
+      return 0;
+    }
+
+    number = (number / 100.0).toFixed(precision);
+
+    var parts = number.split("."),
+      dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + thousands),
+      cents = parts[1] ? decimal + parts[1] : "";
+
+    return dollars + cents;
+  }
+
+  switch (formatString.match(placeholderRegex)[1]) {
+    case "amount":
+      value = formatWithDelimiters(cents, 2);
+      break;
+    case "amount_no_decimals":
+      value = formatWithDelimiters(cents, 0);
+      break;
+    case "amount_with_comma_separator":
+      value = formatWithDelimiters(cents, 2, ".", ",");
+      break;
+    case "amount_no_decimals_with_comma_separator":
+      value = formatWithDelimiters(cents, 0, ".", ",");
+      break;
+  }
+
+  return formatString.replace(placeholderRegex, value);
+}
 
 window.addEventListener("scroll", function () {
   const scrollToTopButton = document.getElementById("scrollToTopButton");
@@ -20,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// sorting
+
 if (document.getElementById("sort_by") != null) {
   document.querySelector("#sort_by").addEventListener("change", function (e) {
     const url = new URL(window.location.href);
@@ -30,8 +82,6 @@ if (document.getElementById("sort_by") != null) {
 }
 
 // forgotten password
-// forgotten password
-
 
 if (document.getElementById("forgotPassword") != null) {
   document.getElementById("forgotPassword").addEventListener("click", (e) => {
@@ -45,7 +95,6 @@ if (document.getElementById("forgotPassword") != null) {
     }
   });
 }
-
 
 if (document.getElementById("forgotPasswordAccount") != null) {
   document
@@ -62,22 +111,19 @@ if (document.getElementById("forgotPasswordAccount") != null) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", (data) => {
-  updateCart(data);
+// nav box shadow
+window.addEventListener("scroll", function () {
+  const scrollPosition =
+    window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrollPosition > 100) {
+    navbar.classList.add("scrolled-nav");
+  } else {
+    navbar.classList.remove("scrolled-nav");
+  }
 });
 
-async function updateCart(data) {
-  try {
-    const response = await fetch("/cart.js");
-    const data = await response.json();
-    document.querySelector("#numberOfCartItem1").innerHTML = data.item_count;
-    document.querySelector("#numberOfCartItem2").innerHTML = data.item_count;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// menu
+// navbar
 const menuElm = document.querySelector(".navbar-toggler");
 const icon = document.querySelector(".navbar-toggler-icon");
 const fontawesome = document.getElementById("mobile");
@@ -114,7 +160,6 @@ if (filterIcon) {
 }
 
 // brand page button toggler
-// brand page button toggler
 
 const allButton = document.getElementById("allButton");
 const watchesButton = document.getElementById("watchesButton");
@@ -137,7 +182,6 @@ if (allButton && watchesButton && jewelryButton) {
   });
 }
 
-// Checking if the articles exist before performing operations on them
 // Checking if the articles exist before performing operations on them
 const articles = document.getElementsByClassName("article");
 
@@ -219,6 +263,7 @@ if (productPage != null) {
   const minimum = 1;
 
   minus.addEventListener("click", () => {
+    console.log(quantityNumber);
     if (quantityNumber.value > minimum) {
       currentValue -= 1;
       quantityNumber.value = currentValue;
@@ -230,7 +275,6 @@ if (productPage != null) {
     quantityNumber.value = currentValue;
   });
 
-  // sticky gallery
   // sticky gallery
   window.addEventListener("scroll", function () {
     const container = document.querySelector(".product-page-container");
@@ -254,7 +298,6 @@ const collectionPage = document.querySelector(".collection-page");
 const navbar = document.querySelector(".navbar");
 const mainContent = document.querySelector("main");
 if (collectionPage) {
-  // navbar not sticky on collection page
   // navbar not sticky on collection page
   navbar.classList.remove("fixed-top");
   mainContent.classList.remove("margin-top");
